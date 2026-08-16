@@ -1,0 +1,8 @@
+/**
+ * Tipos de navegación — cada pantalla y sus parámetros.
+ * Agregá aquí cada ruta nueva a medida que crezca la app.
+ */
+export type RootStackParamList = {
+  Welcome: undefined;
+  Login: undefined;
+};

@@ -2,12 +2,12 @@
 
 ## Estado actual
 
-**6 de 16 ya están insertadas en el informe.** Se incrustaron directamente en
+**7 de 16 ya están insertadas en el informe.** Se incrustaron directamente en
 `informe-evu2.fodt`, así que se regeneran solas al reconstruir el `.docx` y el `.pdf`.
 
 | Figura | Estado | Origen |
 |---|---|---|
-| 1 · pruebas en verde | ⬜ falta | — |
+| 1 · pruebas en verde | ✅ insertada | Captura 19-10-54 |
 | 2 · bienvenida | ⬜ falta | — |
 | 3 · login con validación | ✅ insertada | IMG_0003 |
 | 4 · diario vacío | ⬜ falta | — |

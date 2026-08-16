@@ -20,6 +20,9 @@ verdad —nada de «test» ni «aaa»—. Que haya:
 - Al menos dos **abiertas**, para que el contador del resumen no diga 1.
 - Al menos dos **con foto y coordenadas**, y una sin nada, para que se note que son opcionales.
 
+También vas a necesitar un **segundo correo** para las figuras 13 a 15. Cualquiera sirve
+—no se verifica contra nada—, pero que sea creíble: `valeria@aureo.app`, por ejemplo.
+
 > **En emulador:** el GPS no entrega coordenadas hasta que lo habilites. Controles extendidos
 > → *Location* → activar la señal, fijar un punto en el mapa y **Save Point**. Si el perfil
 > del dispositivo virtual no tiene cámara, usá el botón *Galería*.
@@ -34,7 +37,7 @@ está pensada la app.
 ### Figura 1 — `01-tests.png`
 - **Dónde:** la terminal, en la raíz del proyecto.
 - **Cómo llegar:** `npm test`
-- **Qué debe verse:** las **14 suites** y las **216 pruebas** en verde, con el tiempo total.
+- **Qué debe verse:** las **13 suites** y las **186 pruebas** en verde, con el tiempo total.
   Que entre el bloque completo `Test Suites / Tests / Snapshots / Time`.
 
 ---
@@ -112,23 +115,26 @@ está pensada la app.
 
 ---
 
-## Integración con servicios web
+## Múltiples usuarios
 
-### Figura 13 — `13-respaldo-inicial.png`
-- **Cómo llegar:** botón «Nube» arriba a la derecha del diario, sin haber respaldado nunca.
-- **Qué debe verse:** el estado con las operaciones del dispositivo, «Último respaldo: Nunca»
-  y el botón de importar **deshabilitado**.
+> Estas tres son **consecutivas**: mostrá el mismo teléfono con dos cuentas distintas.
+> Es la evidencia del «permitir múltiples usuarios» del enunciado.
 
-### Figura 14 — `14-respaldo-exitoso.png`
-- **Cómo llegar:** pulsá «Respaldar en la nube».
-- **Qué debe verse:** el mensaje verde «Se respaldaron N operaciones en la nube», la fecha de
-  sincronización y **el identificador remoto**.
+### Figura 13 — `13-usuario-uno.png`
+- **Cómo llegar:** estás dentro con tu correo habitual, con operaciones cargadas.
+- **Qué debe verse:** el diario con sus operaciones **y el correo en el encabezado**. Que se
+  lea con qué cuenta se ingresó, porque es lo que da sentido a las dos capturas siguientes.
 
-### Figura 15 — `15-importacion.png`
-- **Cómo llegar:** eliminá una operación del diario, volvé a la pantalla de nube y pulsá
-  «Importar desde la nube».
-- **Qué debe verse:** el mensaje verde «Se importaron 1 operación desde la nube».
-- **Truco:** si querés que diga más de una, eliminá dos o tres antes de importar.
+### Figura 14 — `14-usuario-dos.png`
+- **Cómo llegar:** botón **«Salir»** arriba a la derecha → confirmar → entrá con un correo
+  distinto, por ejemplo `valeria@aureo.app`, con cualquier contraseña.
+- **Qué debe verse:** el diario **en blanco**, con el segundo correo en el encabezado. Que se
+  note que no aparece ninguna operación de la primera cuenta.
+
+### Figura 15 — `15-usuario-uno-vuelve.png`
+- **Cómo llegar:** «Salir» otra vez y volvé a entrar con el **primer** correo.
+- **Qué debe verse:** las operaciones originales, intactas. Demuestra que no se borraron: cada
+  diario queda guardado por separado.
 
 ---
 

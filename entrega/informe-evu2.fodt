@@ -234,9 +234,8 @@
 <text:p text:style-name="Indice">5. Integración con servicios web y APIs</text:p>
 <text:p text:style-name="IndiceSub">5.1. Cliente HTTP común</text:p>
 <text:p text:style-name="IndiceSub">5.2. Cotización del oro en vivo</text:p>
-<text:p text:style-name="IndiceSub">5.3. Respaldo e importación del diario</text:p>
-<text:p text:style-name="IndiceSub">5.4. Seguridad de la comunicación</text:p>
-<text:p text:style-name="Indice">6. Almacenamiento local y autenticación</text:p>
+<text:p text:style-name="IndiceSub">5.3. Seguridad de la comunicación</text:p>
+<text:p text:style-name="Indice">6. Almacenamiento local y sesión de usuario</text:p>
 <text:p text:style-name="Indice">7. Pruebas automatizadas</text:p>
 <text:p text:style-name="IndiceSub">7.1. Estrategia de prueba</text:p>
 <text:p text:style-name="IndiceSub">7.2. Pruebas de los periféricos</text:p>
@@ -254,7 +253,7 @@
 
 <text:p text:style-name="Normal">Este informe documenta la segunda entrega de <text:span text:style-name="Cursiva">Áureo</text:span>, una aplicación móvil desarrollada para la asignatura Desarrollo de Aplicaciones Móviles. La primera unidad dejó construida la puerta de entrada de la aplicación: la identidad visual, los componentes reutilizables, la navegación y las pantallas de bienvenida y acceso. Esta segunda unidad amplía ese proyecto con lo que exige el resultado de aprendizaje de la unidad: construir aplicaciones móviles que utilicen periféricos del dispositivo —cámara y GPS— e integrarlas con servicios web y APIs externas.</text:p>
 
-<text:p text:style-name="Normal">Áureo es un compañero para aprender a operar oro sin arriesgar dinero real. El usuario registra operaciones simuladas de compra y venta sobre el precio del oro, lleva un diario de cada una con sus notas, y consulta su resultado acumulado. Sobre esa base, esta entrega incorpora cuatro capacidades nuevas: adjuntar a cada operación una fotografía tomada con la cámara del dispositivo, registrar las coordenadas donde se anotó la operación, consultar el precio real del oro en el mercado mediante una API externa, y respaldar el diario completo en un servicio web para poder recuperarlo desde otro dispositivo.</text:p>
+<text:p text:style-name="Normal">Áureo es un compañero para aprender a operar oro sin arriesgar dinero real. El usuario registra operaciones simuladas de compra y venta sobre el precio del oro, lleva un diario de cada una con sus notas, y consulta su resultado acumulado. Sobre esa base, esta entrega incorpora cuatro capacidades nuevas: adjuntar a cada operación una fotografía tomada con la cámara del dispositivo, registrar las coordenadas donde se anotó la operación, consultar el precio real del oro en el mercado mediante una API externa, y separar el diario de cada usuario para que varias personas puedan compartir el mismo teléfono.</text:p>
 
 <text:p text:style-name="Normal">El documento está organizado siguiendo el recorrido natural del desarrollo: primero las decisiones de diseño que condicionaron todo lo demás, luego cada capacidad nueva con su justificación técnica, después la estrategia de pruebas automatizadas, y finalmente las limitaciones que asumimos de forma consciente. El Anexo B relaciona cada sección con el indicador de la rúbrica que le corresponde.</text:p>
 
@@ -301,16 +300,12 @@
     <table:table-cell table:style-name="TablaCelda" office:value-type="string"><text:p text:style-name="TablaTexto">Coordenadas del dispositivo al registrar la operación</text:p></table:table-cell>
   </table:table-row>
   <table:table-row>
+    <table:table-cell table:style-name="TablaCelda" office:value-type="string"><text:p text:style-name="TablaTexto">Autenticación que permita múltiples usuarios</text:p></table:table-cell>
+    <table:table-cell table:style-name="TablaCelda" office:value-type="string"><text:p text:style-name="TablaTexto">Diario separado por cuenta en el mismo dispositivo</text:p></table:table-cell>
+  </table:table-row>
+  <table:table-row>
     <table:table-cell table:style-name="TablaCelda" office:value-type="string"><text:p text:style-name="TablaTexto">Obtener y gestionar datos externos</text:p></table:table-cell>
-    <table:table-cell table:style-name="TablaCelda" office:value-type="string"><text:p text:style-name="TablaTexto">Cotización real de XAU/USD desde una API pública</text:p></table:table-cell>
-  </table:table-row>
-  <table:table-row>
-    <table:table-cell table:style-name="TablaCelda" office:value-type="string"><text:p text:style-name="TablaTexto">Sincronizar con un servicio web para almacenar en remoto</text:p></table:table-cell>
-    <table:table-cell table:style-name="TablaCelda" office:value-type="string"><text:p text:style-name="TablaTexto">Respaldo del diario completo en un servicio REST</text:p></table:table-cell>
-  </table:table-row>
-  <table:table-row>
-    <table:table-cell table:style-name="TablaCelda" office:value-type="string"><text:p text:style-name="TablaTexto">Importar registros desde una API externa</text:p></table:table-cell>
-    <table:table-cell table:style-name="TablaCelda" office:value-type="string"><text:p text:style-name="TablaTexto">Importación con fusión contra el diario local</text:p></table:table-cell>
+    <table:table-cell table:style-name="TablaCelda" office:value-type="string"><text:p text:style-name="TablaTexto">Cotización real de XAU/USD validada antes de usarse</text:p></table:table-cell>
   </table:table-row>
   <table:table-row>
     <table:table-cell table:style-name="TablaCelda" office:value-type="string"><text:p text:style-name="TablaTexto">Almacenamiento local que funcione sin conexión</text:p></table:table-cell>
@@ -474,7 +469,7 @@ export async function tomarFoto(): Promise&lt;ResultadoPeriferico&lt;string&gt;&
 <!-- ===================== 5. APIS ===================== -->
 <text:p text:style-name="Titulo1">5. Integración con servicios web y APIs</text:p>
 
-<text:p text:style-name="Normal">La aplicación se comunica con dos servicios externos, que cubren las dos direcciones que pide el enunciado: obtener datos externos y almacenar datos de forma remota.</text:p>
+<text:p text:style-name="Normal">La aplicación consume un servicio web externo para obtener el precio real del oro. Toda la comunicación pasa por una única capa que concentra el manejo de fallos y la validación de lo que llega.</text:p>
 
 <text:p text:style-name="Titulo2">5.1. Cliente HTTP común</text:p>
 
@@ -521,49 +516,22 @@ export interface ErrorApi {
 
 <text:p text:style-name="Normal">Cuando la consulta falla, la interfaz explica qué ocurrió y ofrece reintentar, en lugar de dejar el espacio vacío. El usuario debe poder distinguir entre «no hay señal» y «la aplicación está rota». Si ya había un precio cargado, se conserva mientras se reintenta: mostrar un valor de hace unos minutos es más útil que no mostrar nada.</text:p>
 
-<text:p text:style-name="Titulo2">5.3. Respaldo e importación del diario</text:p>
+<text:p text:style-name="Titulo2">5.3. Seguridad de la comunicación</text:p>
 
-<text:p text:style-name="Normal">La segunda integración cubre el almacenamiento remoto. El diario completo se sube a <text:span text:style-name="CodigoEnLinea">api.restful-api.dev</text:span>, un servicio REST público que acepta las operaciones de creación, actualización y consulta sin necesidad de credenciales. La pantalla «Respaldo en la nube» ofrece las dos direcciones de forma explícita.</text:p>
-
-<text:p text:style-name="Normal">El diario viaja completo dentro de un único objeto remoto, y no como un objeto por operación. De este modo el respaldo se sube y se baja en una sola petición, sin riesgo de quedar a medias si la conexión se corta en mitad de un lote de envíos. La primera vez se crea con POST; las siguientes se reemplaza con PUT sobre el identificador que devolvió el servidor.</text:p>
-
-<text:p text:style-name="Normal">La operación de importar es la que concentra la lógica interesante. No reemplaza el diario local con el remoto, sino que los fusiona:</text:p>
-
-<text:p text:style-name="Codigo">export function fusionarDiarios(
-  locales: readonly Operacion[],
-  remotas: readonly Operacion[],
-): Operacion[] {
-  const porId = new Map&lt;string, Operacion&gt;();
-
-  // Primero las remotas, para que las locales las sobrescriban al pasar después.
-  for (const operacion of remotas) porId.set(operacion.id, operacion);
-  for (const operacion of locales) porId.set(operacion.id, operacion);
-
-  return [...porId.values()].sort((a, b) =&gt;
-    b.fechaCreacion.localeCompare(a.fechaCreacion),
-  );
-}</text:p>
-
-<text:p text:style-name="Normal">Reemplazar habría borrado todas las operaciones registradas en el dispositivo después del último respaldo. Ante un mismo identificador presente en ambos lados gana la versión local, porque el dispositivo es la fuente de verdad de lo que el usuario acaba de hacer, mientras que el respaldo remoto puede ser de hace días; si ganara el remoto, restaurar pisaría ediciones recientes.</text:p>
-
-<text:p text:style-name="Normal">La desaparición del respaldo en el servidor se maneja de forma explícita. Al subir, un 404 sobre el identificador guardado significa que el objeto fue borrado, así que se crea uno nuevo en lugar de dejar al usuario sin posibilidad de respaldar. Al bajar, un 404 hace que la aplicación olvide el identificador muerto en vez de reintentar eternamente contra algo que ya no existe.</text:p>
-
-<text:p text:style-name="Titulo2">5.4. Seguridad de la comunicación</text:p>
-
-<text:p text:style-name="Normal">Cuatro medidas concretas protegen la comunicación con los servicios externos.</text:p>
+<text:p text:style-name="Normal">Cuatro medidas concretas protegen la comunicación con el servicio externo.</text:p>
 
 <text:p text:style-name="Vinieta">• <text:span text:style-name="Negrita">Solo HTTPS.</text:span> El cliente rechaza cualquier URL que no comience con <text:span text:style-name="CodigoEnLinea">https://</text:span> antes siquiera de intentar la conexión, de modo que los datos nunca llegan a viajar en claro. Android bloquea el tráfico sin cifrar por defecto desde la versión 9, pero la comprobación explícita evita que una URL mal escrita pase inadvertida.</text:p>
 
-<text:p text:style-name="Vinieta">• <text:span text:style-name="Negrita">Ausencia de credenciales.</text:span> Ambos servicios se eligieron deliberadamente entre los que no requieren clave de acceso. El repositorio del proyecto es público, y una API con credenciales habría exigido guardar un secreto que, tarde o temprano, termina en el historial de commits. No hay nada que filtrar porque no hay nada que ocultar. Una prueba automatizada verifica que ninguna petición lleve cabeceras de autorización ni claves en la URL.</text:p>
+<text:p text:style-name="Vinieta">• <text:span text:style-name="Negrita">Ausencia de credenciales.</text:span> El servicio se eligió deliberadamente entre los que no requieren clave de acceso. El repositorio del proyecto es público, y una API con credenciales habría exigido guardar un secreto que, tarde o temprano, termina en el historial de commits. No hay nada que filtrar porque no hay nada que ocultar. Una prueba automatizada verifica que ninguna petición lleve cabeceras de autorización ni claves en la URL.</text:p>
 
-<text:p text:style-name="Vinieta">• <text:span text:style-name="Negrita">Validación de todo dato entrante.</text:span> Nada de lo que devuelve un servidor se incorpora al diario sin verificar su forma. En el caso del respaldo, cada operación se valida individualmente y las que no cumplen se descartan, conservando las válidas.</text:p>
+<text:p text:style-name="Vinieta">• <text:span text:style-name="Negrita">Validación de todo dato entrante.</text:span> Nada de lo que devuelve un servidor se incorpora al diario sin verificar su forma. Un precio ausente, cero o negativo se rechaza aunque el servidor responda correctamente.</text:p>
 
 <text:p text:style-name="Vinieta">• <text:span text:style-name="Negrita">Límite de espera.</text:span> Diez segundos, implementados con <text:span text:style-name="CodigoEnLinea">AbortController</text:span>, que aborta la petición de verdad en lugar de limitarse a ignorar la respuesta tardía.</text:p>
 
 <!-- ===================== 6. ALMACENAMIENTO ===================== -->
-<text:p text:style-name="Titulo1">6. Almacenamiento local y autenticación</text:p>
+<text:p text:style-name="Titulo1">6. Almacenamiento local y sesión de usuario</text:p>
 
-<text:p text:style-name="Normal">El diario se guarda en el dispositivo con AsyncStorage y esa es su fuente principal. La aplicación funciona completa sin conexión a internet: se pueden registrar, editar, cerrar y eliminar operaciones sin red, y el respaldo remoto es un extra para recuperar el diario desde otro dispositivo, nunca un requisito para usarlo.</text:p>
+<text:p text:style-name="Normal">El diario se guarda en el dispositivo con AsyncStorage y esa es su única fuente. La aplicación funciona completa sin conexión a internet: se pueden registrar, editar, cerrar y eliminar operaciones sin red. Lo único que requiere conexión es la cotización del oro, y su ausencia no impide usar el diario.</text:p>
 
 <text:p text:style-name="Normal">La lectura de lo almacenado es defensiva. Lo que hay guardado en un dispositivo pudo escribirlo una versión anterior de la aplicación o pudo dañarse, así que nada se da por sentado. La regla que seguimos es que un registro corrupto nunca deje al usuario sin su diario: las entradas inválidas se descartan y las válidas se conservan.</text:p>
 
@@ -578,16 +546,20 @@ export interface ErrorApi {
   }
 }</text:p>
 
-<text:p text:style-name="Normal">La misma función de validación sirve a las dos fronteras que no son de confianza —lo leído del dispositivo y lo bajado del servidor— y por eso vive en la capa de dominio, no en la de almacenamiento.</text:p>
+<text:p text:style-name="Normal">La misma función de validación sirve a las dos fronteras que no son de confianza —lo leído del dispositivo y lo que llega de la API— y por eso vive en la capa de dominio, no en la de almacenamiento.</text:p>
 
-<text:p text:style-name="Normal">Respecto a la autenticación, la aplicación conserva la pantalla de acceso construida en la primera unidad, con validación de campos y respuesta visual. Se trata de una autenticación local, sin verificación contra un servidor. Es una limitación consciente que se detalla en la sección 9.</text:p>
+<text:p text:style-name="Normal">Respecto a los usuarios, la aplicación conserva la pantalla de acceso construida en la primera unidad y le agrega lo que el enunciado pide al hablar de permitir múltiples usuarios: <text:span text:style-name="Negrita">cada persona tiene su propio diario en el dispositivo</text:span>. La clave de almacenamiento se deriva del identificador con el que se inició sesión, de modo que dos personas que compartan el teléfono no ven ni editan las operaciones de la otra.</text:p>
+
+<text:p text:style-name="Normal">El identificador se normaliza antes de usarlo —se recorta y se pasa a minúsculas— para que quien escriba su correo con una mayúscula distinta encuentre su diario y no uno vacío. La sesión se guarda, así que no hay que volver a identificarse en cada apertura, y al cerrarla el diario queda intacto en el dispositivo esperando el próximo ingreso.</text:p>
+
+<text:p text:style-name="Normal">Se trata de una autenticación local: no verifica las credenciales contra ningún servidor. Su función es separar los diarios, no impedir el acceso. Es una limitación consciente que se detalla en la sección 9.</text:p>
 
 <!-- ===================== 7. PRUEBAS ===================== -->
 <text:p text:style-name="Titulo1">7. Pruebas automatizadas</text:p>
 
 <text:p text:style-name="Titulo2">7.1. Estrategia de prueba</text:p>
 
-<text:p text:style-name="Normal">La suite consta de <text:span text:style-name="Negrita">216 pruebas distribuidas en 14 archivos</text:span>, ejecutables con <text:span text:style-name="CodigoEnLinea">npm test</text:span> y con un tiempo total de ejecución cercano a los tres segundos. El entorno es Jest con el preset <text:span text:style-name="CodigoEnLinea">jest-expo</text:span>, complementado con React Native Testing Library para las pruebas que necesitan montar componentes.</text:p>
+<text:p text:style-name="Normal">La suite consta de <text:span text:style-name="Negrita">186 pruebas distribuidas en 13 archivos</text:span>, ejecutables con <text:span text:style-name="CodigoEnLinea">npm test</text:span> y con un tiempo total de ejecución cercano a los cuatro segundos. El entorno es Jest con el preset <text:span text:style-name="CodigoEnLinea">jest-expo</text:span>, complementado con React Native Testing Library para las pruebas que necesitan montar componentes.</text:p>
 
 <text:p text:style-name="Normal">La estrategia se apoya en una idea que condicionó el diseño del código desde el principio: <text:span text:style-name="Negrita">separar la decisión de la ejecución</text:span>. Los módulos que hablan con la cámara, el GPS o la red se limitan a orquestar; toda la lógica de criterio vive en funciones puras que no cargan nada nativo. El módulo <text:span text:style-name="CodigoEnLinea">src/services/interpretes.ts</text:span> es el ejemplo más claro: importa los tipos de Expo mediante <text:span text:style-name="CodigoEnLinea">import type</text:span>, que TypeScript elimina al compilar, de modo que el archivo puede probarse en cualquier entorno sin simular ningún periférico.</text:p>
 
@@ -634,7 +606,7 @@ export interface ErrorApi {
     .not.toMatch(/authorization|api[_-]?key/i);
 });</text:p>
 
-<text:p text:style-name="Normal">En cuanto a la manipulación de datos externos, se comprueba que un respaldo con registros manipulados no contamine el diario, que la fusión no genere duplicados y que la versión local prevalezca sobre la remota.</text:p>
+<text:p text:style-name="Normal">En cuanto a la manipulación de datos externos, se comprueba que una cotización con un precio ausente, cero, negativo o no numérico se rechace aunque el servidor responda correctamente, y que un cuerpo que no es JSON válido no haga fallar la aplicación. También se verifica la separación de los diarios: que lo que registra un usuario no aparezca ni se escriba en el espacio de otro.</text:p>
 
 <text:p text:style-name="Titulo2">7.4. Un defecto real detectado por las pruebas</text:p>
 
@@ -703,13 +675,13 @@ Received array:  []</text:p>
   </table:table-row>
 </table:table>
 
-<text:p text:style-name="Normal">La cobertura global del proyecto es del 64 %, porque las pantallas y la mayoría de los componentes visuales no tienen pruebas. La decisión fue deliberada: la rúbrica evalúa la fiabilidad de los periféricos y de la integración con APIs, no la disposición de los elementos en pantalla, y las pruebas de renderizado son caras de mantener y frágiles ante cualquier cambio de diseño. Aun así se incluyó una prueba de interacción completa sobre el componente de captura de ubicación, que recorre el camino desde la pulsación en pantalla hasta las coordenadas mostradas.</text:p>
+<text:p text:style-name="Normal">La cobertura global del proyecto es del 63 %, porque las pantallas y la mayoría de los componentes visuales no tienen pruebas. La decisión fue deliberada: la rúbrica evalúa la fiabilidad de los periféricos y de la integración con APIs, no la disposición de los elementos en pantalla, y las pruebas de renderizado son caras de mantener y frágiles ante cualquier cambio de diseño. Aun así se incluyó una prueba de interacción completa sobre el componente de captura de ubicación, que recorre el camino desde la pulsación en pantalla hasta las coordenadas mostradas.</text:p>
 
-<text:p text:style-name="Codigo">Test Suites: 14 passed, 14 total
-Tests:       216 passed, 216 total
-Time:        3.3 s</text:p>
+<text:p text:style-name="Codigo">Test Suites: 13 passed, 13 total
+Tests:       186 passed, 186 total
+Time:        4.0 s</text:p>
 
-<text:p text:style-name="Captura">[ ESPACIO PARA CAPTURA 1 — Salida de la terminal al ejecutar «npm test», mostrando las 14 suites y las 216 pruebas en verde ]</text:p>
+<text:p text:style-name="Captura">[ ESPACIO PARA CAPTURA 1 — Salida de la terminal al ejecutar «npm test», mostrando las 13 suites y las 186 pruebas en verde ]</text:p>
 <text:p text:style-name="Epigrafe">Figura 1. Ejecución completa de la suite de pruebas automatizadas.</text:p>
 
 <!-- ===================== 8. FUNCIONAMIENTO ===================== -->
@@ -756,16 +728,18 @@ Time:        3.3 s</text:p>
 <text:p text:style-name="Captura">[ ESPACIO PARA CAPTURA 12 — Alerta ofreciendo «Abrir ajustes» tras denegar un permiso de forma definitiva ]</text:p>
 <text:p text:style-name="Epigrafe">Figura 12. Cuando el sistema ya no volverá a preguntar, la aplicación ofrece la única salida disponible.</text:p>
 
-<text:p text:style-name="Titulo2">8.4. Integración con servicios web</text:p>
+<text:p text:style-name="Titulo2">8.4. Múltiples usuarios en un mismo teléfono</text:p>
 
-<text:p text:style-name="Captura">[ ESPACIO PARA CAPTURA 13 — Pantalla «Respaldo en la nube» sin respaldo previo ]</text:p>
-<text:p text:style-name="Epigrafe">Figura 13. Estado inicial de la sincronización, antes del primer respaldo.</text:p>
+<text:p text:style-name="Normal">Las tres capturas siguientes son consecutivas y demuestran que cada persona tiene su propio diario en el mismo dispositivo.</text:p>
 
-<text:p text:style-name="Captura">[ ESPACIO PARA CAPTURA 14 — Pantalla de respaldo tras subir, mostrando el identificador remoto y el mensaje de éxito ]</text:p>
-<text:p text:style-name="Epigrafe">Figura 14. Diario respaldado en el servicio web, con su identificador y la fecha de sincronización.</text:p>
+<text:p text:style-name="Captura">[ ESPACIO PARA CAPTURA 13 — Diario del primer usuario, con el correo visible en el encabezado y sus operaciones en la lista ]</text:p>
+<text:p text:style-name="Epigrafe">Figura 13. Diario del primer usuario. El encabezado muestra con qué cuenta se ingresó.</text:p>
 
-<text:p text:style-name="Captura">[ ESPACIO PARA CAPTURA 15 — Mensaje de importación exitosa tras traer operaciones desde la nube ]</text:p>
-<text:p text:style-name="Epigrafe">Figura 15. Importación desde la API externa, fusionada con el diario del dispositivo.</text:p>
+<text:p text:style-name="Captura">[ ESPACIO PARA CAPTURA 14 — Diario vacío tras iniciar sesión con un segundo correo distinto ]</text:p>
+<text:p text:style-name="Epigrafe">Figura 14. La segunda cuenta entra a un diario en blanco: no ve las operaciones de la primera.</text:p>
+
+<text:p text:style-name="Captura">[ ESPACIO PARA CAPTURA 15 — Diario del primer usuario recuperado al volver a iniciar sesión con su correo ]</text:p>
+<text:p text:style-name="Epigrafe">Figura 15. Al regresar la primera cuenta, sus operaciones siguen intactas.</text:p>
 
 <text:p text:style-name="Titulo2">8.5. Comportamiento sin conexión</text:p>
 
@@ -777,21 +751,21 @@ Time:        3.3 s</text:p>
 
 <text:p text:style-name="Normal">Documentamos de forma explícita las decisiones que sabemos que no serían aceptables en un producto real, porque reconocerlas con su justificación nos parece preferible a dejarlas sin mencionar.</text:p>
 
-<text:p text:style-name="Titulo3">El servicio de respaldo es público y sin autenticación</text:p>
+<text:p text:style-name="Titulo3">No hay respaldo del diario en la nube</text:p>
 
-<text:p text:style-name="Normal">Cualquier persona que conozca el identificador de un respaldo puede leerlo, modificarlo o borrarlo. El servicio se eligió por su capacidad de demostrar una integración REST completa sin credenciales, que es lo que evalúa esta unidad, pero no debe usarse con información personal. En Áureo el diario es de operaciones simuladas, de modo que no hay datos reales comprometidos. La aplicación advierte de esta limitación en la propia pantalla de sincronización. En un producto real, el respaldo iría contra un servidor propio con autenticación por usuario.</text:p>
+<text:p text:style-name="Normal">La funcionalidad se implementó por completo y luego se retiró, tras medir los límites reales del servicio elegido: <text:span text:style-name="CodigoEnLinea">api.restful-api.dev</text:span> rechaza con error 500 cualquier cuerpo mayor a un kilobyte —966 bytes pasan, 1466 fallan— y admite solo cincuenta peticiones cada veinticuatro horas. Se evaluaron cinco alternativas públicas y anónimas: jsonblob responde 403, npoint falla con 500, extendsclass y jsonstorage exigen clave de acceso, kvdb pide un correo y textdb acepta la escritura pero no la persiste. Firebase y Supabase sí resolverían el problema, pero requieren una cuenta activa en el momento de la corrección, y un backend propio excede el alcance de una asignatura de desarrollo móvil. Se optó por retirar la funcionalidad antes que dejar en la aplicación un botón que falla de forma intermitente.</text:p>
 
 <text:p text:style-name="Titulo3">La autenticación es local</text:p>
 
-<text:p text:style-name="Normal">La pantalla de acceso valida los campos y da respuesta visual, pero no verifica las credenciales contra ningún servidor ni separa los datos por usuario. Se priorizó el esfuerzo hacia los periféricos, la integración con APIs y las pruebas, que son los aspectos que la rúbrica de esta unidad evalúa de forma explícita.</text:p>
+<text:p text:style-name="Normal">La pantalla de acceso valida los campos, da respuesta visual y separa el diario de cada usuario, pero no verifica las credenciales contra ningún servidor: cualquier contraseña permite entrar. Su función es que varias personas compartan el teléfono sin mezclar sus datos, no impedir el acceso. Se priorizó el esfuerzo hacia los periféricos, la integración con la API y las pruebas, que son los aspectos que la rúbrica de esta unidad evalúa de forma explícita.</text:p>
 
-<text:p text:style-name="Titulo3">Las fotografías no viajan al respaldo</text:p>
+<text:p text:style-name="Titulo3">Las fotografías no salen del dispositivo</text:p>
 
-<text:p text:style-name="Normal">Lo que se guarda en cada operación es la ruta local de la imagen dentro del dispositivo, no la imagen en sí. Al importar un diario en otro teléfono, las operaciones llegan completas pero sus fotografías no se ven, porque esa ruta no existe en el dispositivo nuevo. Transferir las imágenes exigiría codificarlas y subirlas, lo que multiplicaría el tamaño del respaldo y excede lo que pide la evaluación.</text:p>
+<text:p text:style-name="Normal">Lo que se guarda en cada operación es la ruta local de la imagen dentro del dispositivo, no la imagen en sí. Si se desinstala la aplicación o se limpia su caché, las operaciones se conservan pero sus fotografías dejan de mostrarse. Copiar las imágenes a un almacenamiento propio de la aplicación las haría permanentes, y es la mejora natural de esta funcionalidad.</text:p>
 
-<text:p text:style-name="Titulo3">Dependencia de servicios gratuitos de terceros</text:p>
+<text:p text:style-name="Titulo3">Dependencia de un servicio gratuito de terceros</text:p>
 
-<text:p text:style-name="Normal">Ambas APIs son servicios públicos que podrían dejar de estar disponibles. El riesgo está mitigado por diseño: el diario funciona por completo sin conexión, y la caída de cualquiera de los dos servicios degrada la experiencia sin impedir el uso de la aplicación.</text:p>
+<text:p text:style-name="Normal">La cotización proviene de una API pública que podría dejar de estar disponible. El riesgo está mitigado por diseño: el diario funciona por completo sin conexión, y la caída del servicio degrada la experiencia sin impedir el uso de la aplicación. La lección quedó incorporada como norma del equipo: antes de adoptar un servicio externo hay que medir sus límites reales con una carga equivalente a la de producción, no con datos de prueba.</text:p>
 
 <!-- ===================== 10. CONCLUSIÓN ===================== -->
 <text:p text:style-name="Titulo1">10. Conclusión</text:p>
@@ -810,7 +784,7 @@ cd Proyecto-eva2-app-moviles-AureoIA
 npm install
 
 npm start           # inicia Expo; escanear el código QR con Expo Go
-npm test            # ejecuta las 216 pruebas automatizadas
+npm test            # ejecuta las 186 pruebas automatizadas
 npm run test:cobertura   # ejecuta las pruebas e informa la cobertura
 npm run typecheck   # verifica los tipos sin generar archivos</text:p>
 
@@ -846,7 +820,7 @@ npm run typecheck   # verifica los tipos sin generar archivos</text:p>
   <table:table-row>
     <table:table-cell table:style-name="TablaCelda" office:value-type="string"><text:p text:style-name="TablaTexto">Implementa la integración con servicios web y APIs</text:p></table:table-cell>
     <table:table-cell table:style-name="TablaCelda" office:value-type="string"><text:p text:style-name="TablaTexto">5</text:p></table:table-cell>
-    <table:table-cell table:style-name="TablaCelda" office:value-type="string"><text:p text:style-name="TablaTexto">4, 13 a 15</text:p></table:table-cell>
+    <table:table-cell table:style-name="TablaCelda" office:value-type="string"><text:p text:style-name="TablaTexto">4, 6</text:p></table:table-cell>
   </table:table-row>
   <table:table-row>
     <table:table-cell table:style-name="TablaCelda" office:value-type="string"><text:p text:style-name="TablaTexto">Prueba la integración con servicios web y APIs, asegurando fiabilidad y seguridad</text:p></table:table-cell>

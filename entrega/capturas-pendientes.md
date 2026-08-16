@@ -1,8 +1,47 @@
-# Capturas que faltan tomar
+# Capturas
 
-El informe (`informe-evu2.fodt`) ya tiene las dieciséis explicaciones escritas y los recuadros
-puestos. Solo falta tomar las imágenes y **pegarlas sobre el recuadro azul que corresponde**
-en el `.docx`.
+## Estado actual
+
+**6 de 16 ya están insertadas en el informe.** Se incrustaron directamente en
+`informe-evu2.fodt`, así que se regeneran solas al reconstruir el `.docx` y el `.pdf`.
+
+| Figura | Estado | Origen |
+|---|---|---|
+| 1 · pruebas en verde | ⬜ falta | — |
+| 2 · bienvenida | ⬜ falta | — |
+| 3 · login con validación | ✅ insertada | IMG_0003 |
+| 4 · diario vacío | ⬜ falta | — |
+| 5 · diario con operaciones | ⚠️ insertada, **conviene rehacerla** | IMG_0010 |
+| 6 · formulario | ✅ insertada | IMG_0005 |
+| 7 · permiso de cámara | ⬜ falta | — |
+| 8 · cámara abierta | ⬜ falta | — |
+| 9 · foto adjunta | ⬜ falta | — |
+| 10 · permiso de ubicación | ⬜ falta | — |
+| 11 · coordenadas capturadas | ⬜ falta | — |
+| 12 · permiso denegado | ⬜ falta | — |
+| 13 · usuario uno | ✅ insertada | IMG_0012 |
+| 14 · usuario dos | ✅ insertada | IMG_0013 |
+| 15 · usuario uno vuelve | ⬜ falta | — |
+| 16 · sin conexión | ⚠️ insertada, **conviene rehacerla** | IMG_0011 |
+
+> **Por qué rehacer la 5 y la 16.** Se tomaron con la versión anterior de la app: en el
+> encabezado se ve el botón **«Nube»** y el título «Mi diario», que ya no existen. La figura
+> 13 muestra el encabezado actual, con el correo y el botón «Salir». Un corrector atento
+> puede notar la diferencia entre una figura y otra. Rehacerlas toma dos minutos.
+
+> **IMG_0009 no se usó**: es la pantalla de respaldo en la nube, que se retiró del proyecto.
+> **IMG_0004, IMG_0006 e IMG_0008** quedaron fuera por ser versiones anteriores o parciales
+> de tomas que ya están cubiertas.
+
+## Cómo agregar las que faltan
+
+Guardá cada imagen como `entrega/capturas/figNN.jpg` (por ejemplo `fig07.jpg`) y avisame:
+el script las incrusta y regenera los documentos. O pegalas a mano sobre el recuadro azul
+correspondiente en el `.docx`.
+
+---
+
+## Guía de cada toma
 
 ## Antes de empezar
 

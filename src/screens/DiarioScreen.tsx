@@ -1,8 +1,10 @@
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { ActivityIndicator, Alert, FlatList, StyleSheet, Text, View } from 'react-native';
+import BannerCotizacion from '../components/BannerCotizacion';
 import Boton from '../components/Boton';
 import OperacionItem from '../components/OperacionItem';
 import { useDiario } from '../context/DiarioContext';
+import { useCotizacion } from '../hooks/useCotizacion';
 import { calcularResultadoTotal, contarAbiertas } from '../domain/diario';
 import { colors } from '../theme/colors';
 import { borderWidth, fontSize, radius, spacing } from '../theme/spacing';
@@ -14,6 +16,7 @@ type DiarioScreenProps = NativeStackScreenProps<RootStackParamList, 'Diario'>;
 
 function DiarioScreen({ navigation }: DiarioScreenProps): React.JSX.Element {
   const { operaciones, cargando, alternar } = useDiario();
+  const { cotizacion, cargando: cargandoPrecio, error: errorPrecio, refrescar } = useCotizacion();
 
   const abiertas = contarAbiertas(operaciones);
   const resultadoTotal = calcularResultadoTotal(operaciones);
@@ -75,6 +78,15 @@ function DiarioScreen({ navigation }: DiarioScreenProps): React.JSX.Element {
           </Text>
           <Text style={styles.etiquetaResumen}>resultado acumulado</Text>
         </View>
+      </View>
+
+      <View style={styles.cotizacion}>
+        <BannerCotizacion
+          cotizacion={cotizacion}
+          cargando={cargandoPrecio}
+          error={errorPrecio}
+          onRefrescar={refrescar}
+        />
       </View>
 
       <FlatList<Operacion>
@@ -153,6 +165,10 @@ const styles = StyleSheet.create({
     color: colors.textoTenue,
     fontSize: fontSize.xs,
     textAlign: 'center',
+  },
+  cotizacion: {
+    paddingHorizontal: spacing.md,
+    paddingTop: spacing.md,
   },
   lista: {
     padding: spacing.md,

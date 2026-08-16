@@ -9,10 +9,12 @@ import {
   Text,
   View,
 } from 'react-native';
+import BannerCotizacion from '../components/BannerCotizacion';
 import Boton from '../components/Boton';
 import CampoTexto from '../components/CampoTexto';
 import SelectorTipo from '../components/SelectorTipo';
 import { useDiario } from '../context/DiarioContext';
+import { useCotizacion } from '../hooks/useCotizacion';
 import { colors } from '../theme/colors';
 import { fontSize, spacing } from '../theme/spacing';
 import type { RootStackParamList } from '../navigation/types';
@@ -37,6 +39,7 @@ function OperacionFormScreen({
   route,
 }: OperacionFormScreenProps): React.JSX.Element {
   const { operaciones, registrar, editar, eliminar } = useDiario();
+  const { cotizacion, cargando: cargandoPrecio, error: errorPrecio, refrescar } = useCotizacion();
 
   const id = route.params?.id;
   const operacionExistente = operaciones.find((operacion) => operacion.id === id);
@@ -148,6 +151,17 @@ function OperacionFormScreen({
         contentContainerStyle={styles.contenido}
         keyboardShouldPersistTaps="handled"
       >
+        <BannerCotizacion
+          cotizacion={cotizacion}
+          cargando={cargandoPrecio}
+          error={errorPrecio}
+          onRefrescar={refrescar}
+          onUsarPrecio={(precio) => {
+            setPrecioEntrada(precio.toFixed(2));
+            setErrores({ ...errores, precioEntrada: undefined });
+          }}
+        />
+
         <SelectorTipo etiqueta="Sentido de la operación" valor={tipo} onChange={setTipo} />
 
         <CampoTexto

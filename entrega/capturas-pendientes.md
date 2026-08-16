@@ -2,27 +2,32 @@
 
 ## Estado actual
 
-**7 de 16 ya están insertadas en el informe.** Se incrustaron directamente en
+**13 de 16 ya están insertadas en el informe.** Se incrustaron directamente en
 `informe-evu2.fodt`, así que se regeneran solas al reconstruir el `.docx` y el `.pdf`.
 
 | Figura | Estado | Origen |
 |---|---|---|
 | 1 · pruebas en verde | ✅ insertada | Captura 19-10-54 |
-| 2 · bienvenida | ⬜ falta | — |
+| 2 · bienvenida | ✅ insertada | WhatsApp 7.26.23 (2) |
 | 3 · login con validación | ✅ insertada | IMG_0003 |
-| 4 · diario vacío | ⬜ falta | — |
+| 4 · diario vacío | ✅ insertada | WhatsApp 7.26.23 (1) |
 | 5 · diario con operaciones | ⚠️ insertada, **conviene rehacerla** | IMG_0010 |
 | 6 · formulario | ✅ insertada | IMG_0005 |
-| 7 · permiso de cámara | ⬜ falta | — |
-| 8 · cámara abierta | ⬜ falta | — |
-| 9 · foto adjunta | ⬜ falta | — |
-| 10 · permiso de ubicación | ⬜ falta | — |
-| 11 · coordenadas capturadas | ⬜ falta | — |
-| 12 · permiso denegado | ⬜ falta | — |
+| 7 · permiso de cámara | ⚠️ insertada, ver nota | WhatsApp 7.26.22 (1) |
+| 8 · cámara abierta | ⬜ **falta** | — |
+| 9 · foto adjunta | ✅ insertada | WhatsApp 7.26.22 (recorte superior) |
+| 10 · permiso de ubicación | ⬜ **falta** | — |
+| 11 · coordenadas capturadas | ✅ insertada | WhatsApp 7.26.22 (recorte inferior) |
+| 12 · permiso denegado | ✅ insertada | WhatsApp 7.26.23 |
 | 13 · usuario uno | ✅ insertada | IMG_0012 |
 | 14 · usuario dos | ✅ insertada | IMG_0013 |
-| 15 · usuario uno vuelve | ⬜ falta | — |
+| 15 · usuario uno vuelve | ⬜ **falta** | — |
 | 16 · sin conexión | ⚠️ insertada, **conviene rehacerla** | IMG_0011 |
+
+> **Sobre la figura 7.** El diálogo que aparece es el de **Expo Go**, en inglés, no el del
+> sistema con nuestro mensaje en español. Expo Go intermedia los permisos, así que el texto
+> declarado en `app.json` solo se ve en una compilación independiente. El epígrafe del informe
+> lo explica, que es más honesto que omitirlo.
 
 > **Por qué rehacer la 5 y la 16.** Se tomaron con la versión anterior de la app: en el
 > encabezado se ve el botón **«Nube»** y el título «Mi diario», que ya no existen. La figura

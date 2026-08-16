@@ -307,8 +307,29 @@ npm start
 ```
 
 Escanea el código QR con Expo Go (Android) o con la cámara (iOS). El teléfono y
-el computador deben estar en la misma red Wi-Fi. Si la conexión falla, usa
-`npx expo start --tunnel`.
+el computador deben estar en la misma red Wi-Fi.
+
+### Si el teléfono no conecta
+
+```bash
+npm run tunnel
+```
+
+Levanta el servidor a través de un túnel público, de modo que **el teléfono no
+necesita estar en la misma red** que el computador. Es la vía a usar cuando el
+QR no abre nada, cuando la red tiene aislamiento de clientes (habitual en redes
+universitarias o de oficina) o cuando el computador está en una VPN.
+
+Requiere `@expo/ngrok`. Si no lo tienes:
+
+```bash
+npm install -g @expo/ngrok
+```
+
+**Un solo servidor a la vez.** Si aparece `Port 8081 is running this app in
+another window`, hay una instancia previa levantada: ciérrala con `Ctrl+C` en su
+terminal antes de arrancar el túnel, o usa otro puerto con
+`npx expo start --tunnel --port 8082`.
 
 ### Probar los periféricos en un emulador
 

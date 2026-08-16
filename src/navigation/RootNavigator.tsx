@@ -4,6 +4,8 @@ import { colors } from '../theme/colors';
 import type { RootStackParamList } from './types';
 import WelcomeScreen from '../screens/WelcomeScreen';
 import LoginScreen from '../screens/LoginScreen';
+import DiarioScreen from '../screens/DiarioScreen';
+import OperacionFormScreen from '../screens/OperacionFormScreen';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -32,6 +34,16 @@ function RootNavigator(): React.JSX.Element {
           name="Login"
           component={LoginScreen}
           options={{ title: 'Iniciar sesión' }}
+        />
+        <Stack.Screen
+          name="Diario"
+          component={DiarioScreen}
+          options={{ title: 'Mi diario', headerBackVisible: false }}
+        />
+        <Stack.Screen
+          name="OperacionForm"
+          component={OperacionFormScreen}
+          options={{ title: 'Nueva operación' }}
         />
       </Stack.Navigator>
     </NavigationContainer>

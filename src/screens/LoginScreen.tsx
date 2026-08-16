@@ -1,6 +1,6 @@
+import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useState } from 'react';
 import {
-  Alert,
   KeyboardAvoidingView,
   Platform,
   StyleSheet,
@@ -11,13 +11,15 @@ import Boton from '../components/Boton';
 import CampoTexto from '../components/CampoTexto';
 import { colors } from '../theme/colors';
 import { fontSize, spacing } from '../theme/spacing';
+import type { RootStackParamList } from '../navigation/types';
 
-function LoginScreen(): React.JSX.Element {
+type LoginScreenProps = NativeStackScreenProps<RootStackParamList, 'Login'>;
+
+function LoginScreen({ navigation }: LoginScreenProps): React.JSX.Element {
   const [usuario, setUsuario] = useState('');
   const [contrasena, setContrasena] = useState('');
   const [errorUsuario, setErrorUsuario] = useState<string | undefined>();
   const [errorContrasena, setErrorContrasena] = useState<string | undefined>();
-  const [logueado, setLogueado] = useState(false);
 
   function handleIngresar(): void {
     const hayErrorUsuario = usuario.trim().length === 0;
@@ -30,16 +32,9 @@ function LoginScreen(): React.JSX.Element {
 
     if (hayErrorUsuario || hayErrorContrasena) return;
 
-    Alert.alert('Bienvenido', `Hola, ${usuario}!`);
-    setLogueado(true);
-  }
-
-  if (logueado) {
-    return (
-      <View style={styles.centered}>
-        <Text style={styles.welcomeTitle}>¡Bienvenido, {usuario}!</Text>
-      </View>
-    );
+    // `replace` en lugar de `navigate`: una vez dentro, el gesto de volver no
+    // debe devolver al formulario de acceso.
+    navigation.replace('Diario');
   }
 
   return (
@@ -93,13 +88,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingHorizontal: spacing.lg,
   },
-  centered: {
-    flex: 1,
-    backgroundColor: colors.fondo,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingHorizontal: spacing.lg,
-  },
   heading: {
     color: colors.texto,
     fontSize: fontSize.lg,
@@ -112,12 +100,6 @@ const styles = StyleSheet.create({
   },
   buttonWrapper: {
     marginTop: spacing.md,
-  },
-  welcomeTitle: {
-    color: colors.primario,
-    fontSize: fontSize.xl,
-    fontWeight: 'bold',
-    textAlign: 'center',
   },
 });
 

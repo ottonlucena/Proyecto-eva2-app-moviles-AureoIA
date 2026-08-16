@@ -4,6 +4,7 @@ import {
   Text,
   TextInput,
   View,
+  type KeyboardTypeOptions,
   type ViewStyle,
 } from 'react-native';
 import { colors } from '../theme/colors';
@@ -16,6 +17,10 @@ interface CampoTextoProps {
   placeholder?: string;
   secureTextEntry?: boolean;
   error?: string;
+  /** Teclado a mostrar. `decimal-pad` para precios y cantidades. */
+  keyboardType?: KeyboardTypeOptions;
+  /** Campo de varias líneas, para textos largos como las notas. */
+  multiline?: boolean;
 }
 
 function CampoTexto({
@@ -25,6 +30,8 @@ function CampoTexto({
   placeholder,
   secureTextEntry = false,
   error,
+  keyboardType = 'default',
+  multiline = false,
 }: CampoTextoProps): React.JSX.Element {
   const [isFocused, setIsFocused] = useState(false);
 
@@ -49,10 +56,16 @@ function CampoTexto({
         placeholder={placeholder}
         placeholderTextColor={colors.textoTenue}
         secureTextEntry={secureTextEntry}
+        keyboardType={keyboardType}
+        multiline={multiline}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
-        editable={!hasError}
-        style={[styles.input, { borderColor, borderWidth: anchoBorde }]}
+        accessibilityLabel={etiqueta}
+        style={[
+          styles.input,
+          multiline && styles.inputMultilinea,
+          { borderColor, borderWidth: anchoBorde },
+        ]}
       />
       {hasError && <Text style={styles.error}>{error}</Text>}
     </View>
@@ -75,6 +88,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacing.md,
     paddingVertical: spacing.sm + spacing.xs,
     fontSize: fontSize.md,
+  },
+  inputMultilinea: {
+    minHeight: spacing.xxl + spacing.lg,
+    paddingTop: spacing.sm + spacing.xs,
+    textAlignVertical: 'top',
   },
   error: {
     color: colors.bajista,

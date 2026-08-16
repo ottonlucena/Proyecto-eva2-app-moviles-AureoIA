@@ -10,7 +10,7 @@ cómo está hecha.
 |---|---|---|
 | 1 | [`brief.md`](./brief.md) | El problema en nuestras palabras. Qué resuelve Áureo y qué queda fuera. |
 | 2 | [`mvp.md`](./mvp.md) | El alcance de esta entrega, con historias de usuario y lo que se recortó. |
-| 3 | [`domain.md`](./domain.md) | La operación, sus estados, y las reglas de negocio R1–R10. |
+| 3 | [`domain.md`](./domain.md) | La operación, sus estados, y las reglas de negocio R1–R9. |
 | 4 | [`stack.md`](./stack.md) | Qué tecnologías elegimos y por qué, con las alternativas que descartamos. |
 | 5 | [`architecture.md`](./architecture.md) | Capas, dependencia descendente, periféricos, red, estado y deuda técnica. |
 | 6 | [`design.md`](./design.md) | Identidad visual: paleta, tipografía, componentes y tono. |

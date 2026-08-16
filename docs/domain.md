@@ -45,7 +45,6 @@ la cámara y el GPS.
 | **R7** | En una **compra** se gana si el precio sube; en una **venta**, si baja. | `calcularResultado` |
 | **R8** | Un lote equivale a **100 onzas troy**. | `ONZAS_POR_LOTE` |
 | **R9** | El resultado acumulado **ignora las operaciones abiertas**. Solo suma las cerradas. | `calcularResultadoTotal` |
-| **R10** | Al fusionar diarios, ante el mismo `id` **gana la versión local**. | `fusionarDiarios` |
 
 ## 3. Cómo se calcula el resultado
 
@@ -88,10 +87,9 @@ El sistema tiene **dos fronteras por las que entran datos que no controlamos**:
 
 1. Lo que se lee del **almacenamiento del dispositivo**, que pudo escribirlo una versión
    anterior de la app o pudo corromperse.
-2. Lo que se baja del **respaldo remoto**, que es un objeto público que pudo ser alterado
-   por terceros.
+2. Lo que llega de una **API externa**, que puede cambiar su contrato sin avisar.
 
-Ambas usan exactamente el mismo guardián, `esOperacionValida` en `src/domain/validacion.ts`,
+Ambas usan el mismo guardián, `esOperacionValida` en `src/domain/validacion.ts`,
 y por eso vive en el dominio y no en la capa de almacenamiento.
 
 La regla que aplica es: **descartar lo inválido, conservar lo válido**. Perder un registro

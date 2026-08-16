@@ -18,7 +18,7 @@
 | H7 | Ver mi resultado acumulado y cuántas tengo abiertas | Entender cómo voy en conjunto |
 | H8 | Editar o eliminar una operación | Corregir un error de tipeo sin rehacer todo |
 | H9 | Usar la app sin conexión | Registrar una operación en el metro o en un avión |
-| H10 | Respaldar mi diario y recuperarlo | No perder meses de registro al cambiar de teléfono |
+| H10 | Que mi diario sea solo mío en un teléfono compartido | Prestar el teléfono sin que otro vea ni edite mis operaciones |
 
 ### Pantallas
 
@@ -26,7 +26,6 @@
 2. **Login** — formulario con validación (heredado de la Unidad 1).
 3. **Diario** — lista de operaciones, resumen y cotización en vivo.
 4. **Formulario de operación** — alta y edición, con cámara y GPS.
-5. **Respaldo en la nube** — subir e importar.
 
 ## 2. Fuera del MVP (y por qué)
 
@@ -36,8 +35,7 @@
 | Saldo ficticio y gestión de capital | Obliga a modelar depósitos, retiros y margen. El resultado por operación ya demuestra el cálculo sin esa complejidad. |
 | Gráfico de velas dentro de la app | Requiere datos históricos y una librería de gráficos pesada. La foto del gráfico real cubre la necesidad y además justifica el uso de la cámara. |
 | Autenticación real contra un servidor | La rúbrica de esta unidad no la evalúa. El esfuerzo se dirigió a periféricos, APIs y pruebas. |
-| Subir las fotos al respaldo | Multiplicaría el tamaño del respaldo. Se documenta como limitación en [`architecture.md`](./architecture.md). |
-| Sincronización automática en segundo plano | Sin control de versiones por operación, fusionar sin que el usuario lo pida puede resucitar registros que borró a propósito. |
+| Respaldo del diario en la nube | Se implementó y se retiró: ningún servicio de almacenamiento JSON anónimo resultó viable. Ver [`architecture.md`](./architecture.md). |
 
 ## 3. La decisión que simplifica todo: el diario es la lista
 
@@ -64,7 +62,7 @@ La equivalencia con lo pedido:
 | Tarea completada / pendiente | Operación cerrada / abierta |
 | Imagen adjunta a la tarea | Foto del gráfico |
 | Ubicación donde se crea la tarea | Coordenadas al registrar |
-| Importar tareas desde una API | Importar operaciones desde el respaldo |
+| Obtener datos de una API externa | Cotización real del oro |
 
 ## 4. Definición de "terminado"
 

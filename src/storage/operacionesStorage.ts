@@ -1,19 +1,20 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { filtrarOperacionesValidas } from '../domain/validacion';
 import type { Operacion } from '../types/operacion';
+import { claveDiario } from './sesionStorage';
 
 /**
  * Persistencia local del diario de operaciones.
  *
- * El diario vive en el dispositivo, así que la app funciona completa sin
- * conexión a internet. La sincronización con la API externa se apoya sobre
- * esta capa, nunca la reemplaza.
+ * El diario vive en el dispositivo y esa es su única fuente: la app funciona
+ * completa sin conexión a internet.
+ *
+ * Cada usuario tiene su propia clave, de modo que dos personas que compartan
+ * el teléfono no vean el mismo diario.
  *
  * El parseo se expone como función pura para poder probarlo sin depender del
  * almacenamiento real.
  */
-
-export const CLAVE_OPERACIONES = '@aureo:operaciones';
 
 /**
  * Convierte el texto crudo del almacenamiento en operaciones utilizables.
@@ -31,13 +32,16 @@ export function parsearOperaciones(crudo: string | null): Operacion[] {
   }
 }
 
-/** Lee el diario completo desde el dispositivo. */
-export async function cargarOperaciones(): Promise<Operacion[]> {
-  const crudo = await AsyncStorage.getItem(CLAVE_OPERACIONES);
+/** Lee el diario del usuario indicado. */
+export async function cargarOperaciones(usuario: string | undefined): Promise<Operacion[]> {
+  const crudo = await AsyncStorage.getItem(claveDiario(usuario));
   return parsearOperaciones(crudo);
 }
 
-/** Reemplaza el diario guardado en el dispositivo. */
-export async function guardarOperaciones(operaciones: Operacion[]): Promise<void> {
-  await AsyncStorage.setItem(CLAVE_OPERACIONES, JSON.stringify(operaciones));
+/** Reemplaza el diario del usuario indicado. */
+export async function guardarOperaciones(
+  usuario: string | undefined,
+  operaciones: Operacion[],
+): Promise<void> {
+  await AsyncStorage.setItem(claveDiario(usuario), JSON.stringify(operaciones));
 }

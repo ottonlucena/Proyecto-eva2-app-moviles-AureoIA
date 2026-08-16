@@ -38,7 +38,6 @@ Una aplicación móvil que funciona como diario de operaciones simuladas. El usu
 - Consulta el **precio real del oro** en el momento de registrar, traído de una API externa.
 - Cierra la operación con su precio de salida y ve el resultado en dólares.
 - Revisa su resultado acumulado y cuántas operaciones tiene abiertas.
-- **Respalda su diario en la nube** para recuperarlo si cambia de teléfono.
 
 La foto y las coordenadas no son un adorno técnico: son precisamente el contexto que se
 pierde. Una operación con la captura del gráfico y el lugar donde se tomó la decisión es
@@ -53,12 +52,14 @@ Delimitar esto es parte del trabajo. Quedan fuera:
 - Gráficos de velas dentro de la app: para eso está la foto del gráfico real.
 - Micro-lecciones de trading, que estaban en la visión original de la Unidad 1.
 - Cuentas de usuario reales con verificación en un servidor.
+- Respaldo del diario en la nube. Ver `architecture.md`, deuda técnica.
 - Notificaciones de precio o alertas.
 
 ## 5. Restricciones que vienen dadas
 
 - La app debe **usar periféricos del dispositivo**: cámara y GPS como mínimo.
 - Debe **integrarse con servicios web y APIs** para obtener y gestionar datos externos.
+- Debe **permitir múltiples usuarios** en el mismo dispositivo.
 - Debe **funcionar sin conexión**, con almacenamiento local.
 - Debe incluir **pruebas automatizadas** que verifiquen los periféricos y la integración.
 - El código y su documentación pesan tanto como la funcionalidad: otra persona debe poder
@@ -68,8 +69,8 @@ Delimitar esto es parte del trabajo. Quedan fuera:
 
 El proyecto está bien hecho si el usuario puede registrar una operación completa —con su
 foto, sus coordenadas y el precio real de mercado— en menos de un minuto desde el teléfono,
-si puede consultarla después aunque esté sin señal, y si al cambiar de dispositivo puede
-recuperar su diario entero desde la nube.
+si puede consultarla después aunque esté sin señal, y si otra persona puede usar el mismo
+teléfono sin ver ni tocar sus operaciones.
 
 ---
 

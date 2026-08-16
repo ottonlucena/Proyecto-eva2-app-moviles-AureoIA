@@ -5,10 +5,8 @@ import {
   calcularResultado,
   calcularResultadoTotal,
   contarAbiertas,
-  contarNuevasDesdeRemoto,
   crearOperacion,
   eliminarOperacion,
-  fusionarDiarios,
   generarId,
   ONZAS_POR_LOTE,
 } from '../diario';
@@ -209,52 +207,4 @@ describe('resúmenes', () => {
   });
 });
 
-describe('fusionarDiarios', () => {
-  const local = operacion({ id: 'compartida', notas: 'version del telefono' });
-  const remota = operacion({ id: 'compartida', notas: 'version del servidor' });
-  const soloRemota = operacion({ id: 'solo-nube', fechaCreacion: '2026-08-15T10:00:00.000Z' });
 
-  it('incorpora las operaciones que solo estaban en el servidor', () => {
-    expect(fusionarDiarios([local], [soloRemota])).toHaveLength(2);
-  });
-
-  it('ante el mismo id gana el dispositivo', () => {
-    const [resultado] = fusionarDiarios([local], [remota]);
-
-    expect(resultado.notas).toBe('version del telefono');
-  });
-
-  it('no duplica al fusionar un diario consigo mismo', () => {
-    const lista = [local, soloRemota];
-    expect(fusionarDiarios(lista, lista)).toHaveLength(2);
-  });
-
-  it('ordena de más nueva a más vieja', () => {
-    const nueva = operacion({ id: 'n', fechaCreacion: '2026-08-16T23:00:00.000Z' });
-    const vieja = operacion({ id: 'v', fechaCreacion: '2026-01-01T00:00:00.000Z' });
-
-    expect(fusionarDiarios([vieja], [nueva]).map((o) => o.id)).toEqual(['n', 'v']);
-  });
-
-  it('con el diario local vacío, restaurar recupera todo', () => {
-    expect(fusionarDiarios([], [local, soloRemota])).toHaveLength(2);
-  });
-
-  it('sin nada en el servidor, el diario local queda intacto', () => {
-    expect(fusionarDiarios([local], [])).toEqual([local]);
-  });
-});
-
-describe('contarNuevasDesdeRemoto', () => {
-  it('cuenta las que el dispositivo no tenía', () => {
-    const a = operacion({ id: 'a' });
-    const b = operacion({ id: 'b' });
-
-    expect(contarNuevasDesdeRemoto([a], [a, b])).toBe(1);
-  });
-
-  it('da cero si el diario ya estaba al día', () => {
-    const a = operacion({ id: 'a' });
-    expect(contarNuevasDesdeRemoto([a], [a])).toBe(0);
-  });
-});

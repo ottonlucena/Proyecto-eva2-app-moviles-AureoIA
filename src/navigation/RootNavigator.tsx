@@ -6,7 +6,6 @@ import WelcomeScreen from '../screens/WelcomeScreen';
 import LoginScreen from '../screens/LoginScreen';
 import DiarioScreen from '../screens/DiarioScreen';
 import OperacionFormScreen from '../screens/OperacionFormScreen';
-import SincronizacionScreen from '../screens/SincronizacionScreen';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -45,11 +44,6 @@ function RootNavigator(): React.JSX.Element {
           name="OperacionForm"
           component={OperacionFormScreen}
           options={{ title: 'Nueva operación' }}
-        />
-        <Stack.Screen
-          name="Sincronizacion"
-          component={SincronizacionScreen}
-          options={{ title: 'Respaldo en la nube' }}
         />
       </Stack.Navigator>
     </NavigationContainer>

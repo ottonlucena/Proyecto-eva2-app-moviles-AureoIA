@@ -128,8 +128,6 @@ pantalla en blanco.
 **Formulario** — de arriba abajo: cotización con botón «Usar», selector compra/venta en
 verde y rojo, campos numéricos con teclado decimal, notas multilínea, foto y ubicación.
 
-**Respaldo en la nube** — tarjeta de estado, dos botones para las dos direcciones, y la
-advertencia de que el servicio es público.
 
 ## 8. Tono de los textos
 
@@ -138,7 +136,7 @@ Directo, sin tecnicismos y sin infantilizar.
 
 | En vez de | Escribimos |
 |---|---|
-| «Error 404» | «El respaldo ya no existe en el servidor.» |
+| «Error 404» | «No encontramos lo que buscabas en el servidor.» |
 | «Network request failed» | «No hay conexión a internet.» |
 | «Timeout exceeded» | «No pudimos fijar tu posición. Probá al aire libre.» |
 | «Permission denied» | «Necesitamos la cámara para adjuntar una foto a la operación.» |

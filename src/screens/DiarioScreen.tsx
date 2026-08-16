@@ -13,6 +13,7 @@ import BannerCotizacion from '../components/BannerCotizacion';
 import Boton from '../components/Boton';
 import OperacionItem from '../components/OperacionItem';
 import { useDiario } from '../context/DiarioContext';
+import { useSesion } from '../context/SesionContext';
 import { useCotizacion } from '../hooks/useCotizacion';
 import { calcularResultadoTotal, contarAbiertas } from '../domain/diario';
 import { colors } from '../theme/colors';
@@ -25,25 +26,40 @@ type DiarioScreenProps = NativeStackScreenProps<RootStackParamList, 'Diario'>;
 
 function DiarioScreen({ navigation }: DiarioScreenProps): React.JSX.Element {
   const { operaciones, cargando, alternar } = useDiario();
+  const { usuario, cerrarSesion } = useSesion();
   const { cotizacion, cargando: cargandoPrecio, error: errorPrecio, refrescar } = useCotizacion();
 
   const abiertas = contarAbiertas(operaciones);
   const resultadoTotal = calcularResultadoTotal(operaciones);
 
+  function handleSalir(): void {
+    Alert.alert('Cerrar sesión', 'Tu diario queda guardado en este dispositivo.', [
+      { text: 'Cancelar', style: 'cancel' },
+      {
+        text: 'Salir',
+        onPress: () => {
+          // `replace` para que el gesto de volver no reingrese al diario.
+          void cerrarSesion().then(() => navigation.replace('Login'));
+        },
+      },
+    ]);
+  }
+
   useLayoutEffect(() => {
     navigation.setOptions({
+      title: usuario === undefined ? 'Mi diario' : usuario,
       headerRight: () => (
         <Pressable
-          onPress={() => navigation.navigate('Sincronizacion')}
+          onPress={handleSalir}
           accessibilityRole="button"
-          accessibilityLabel="Respaldo en la nube"
+          accessibilityLabel="Cerrar sesión"
           hitSlop={spacing.sm}
         >
-          <Text style={styles.accionEncabezado}>Nube</Text>
+          <Text style={styles.accionEncabezado}>Salir</Text>
         </Pressable>
       ),
     });
-  }, [navigation]);
+  });
 
   function abrirFormulario(id?: string): void {
     navigation.navigate('OperacionForm', id === undefined ? undefined : { id });

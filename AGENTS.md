@@ -93,25 +93,29 @@ los servicios conocen el dominio, el dominio no conoce a nadie. Nunca al revés.
 17. Solo HTTPS. El cliente rechaza HTTP plano antes de intentar la conexión.
 18. Los errores se devuelven como valor (`Resultado<T>`), no se lanzan. En un
     móvil quedarse sin red es flujo normal, no una excepción.
-19. Se conserva el código de estado HTTP. De detectar un 404 depende que un
-    respaldo borrado se vuelva a crear.
+19. Se conserva el código de estado HTTP: cada estado lleva a una acción
+    distinta de quien llama.
 20. TODO dato que llega de la red se valida antes de entrar a la app. Una API
     puede cambiar su contrato sin avisar.
 21. **Prohibido introducir APIs con clave de acceso.** El repositorio es
     público. Si una funcionalidad nueva la exige, hay que discutirlo con el
     equipo antes de escribir código.
+22. **Antes de adoptar un servicio externo, medir sus límites reales** con una
+    carga como la que tendrá en producción. El respaldo remoto se implementó
+    entero y hubo que retirarlo porque el servicio cortaba a 1 KB y a 50
+    peticiones diarias, y las pruebas iniciales usaron cargas de juguete.
 
 ## 6. Reglas de pruebas
 
-22. Toda lógica nueva en `domain/`, `api/`, `services/`, `storage/`, `hooks/` o
+23. Toda lógica nueva en `domain/`, `api/`, `services/`, `storage/`, `hooks/` o
     `context/` viene con sus pruebas. Esas capas se mantienen sobre el 95 % de
     cobertura.
-23. Las pantallas y los componentes puramente visuales NO se prueban con
+24. Las pantallas y los componentes puramente visuales NO se prueban con
     renderizado, salvo que concentren interacción real. Son caras de mantener y
     frágiles ante cambios de diseño.
-24. Las pruebas cubren los caminos de fallo, no solo el feliz: permiso negado,
+25. Las pruebas cubren los caminos de fallo, no solo el feliz: permiso negado,
     cancelación, timeout, 404, red caída, datos corruptos.
-25. `npm test` y `npm run typecheck` deben pasar antes de cada commit.
+26. `npm test` y `npm run typecheck` deben pasar antes de cada commit.
 
 ## 7. Identidad visual
 
@@ -160,11 +164,15 @@ Antes de tocar código, leer lo que corresponda en [`docs/`](./docs/):
 
 - `docs/brief.md` — el problema y qué queda fuera.
 - `docs/mvp.md` — alcance y definición de "terminado".
-- `docs/domain.md` — la operación y las reglas R1–R10.
+- `docs/domain.md` — la operación y las reglas R1–R9.
 - `docs/stack.md` — tecnologías y alternativas descartadas.
 - `docs/architecture.md` — capas, periféricos, red, estado y deuda técnica.
 - `docs/design.md` — paleta, tipografía, formatos y tono.
 - `docs/testing.md` — estrategia de pruebas.
+
+Cada usuario tiene su propio diario: la clave de almacenamiento sale de
+`claveDiario(usuario)` en `src/storage/sesionStorage.ts`. Nunca escribir en
+`@aureo:operaciones` a mano.
 
 Si una decisión nueva contradice lo que dice un documento, se actualiza el documento en el
 mismo commit. Documentación desactualizada es peor que no tenerla.

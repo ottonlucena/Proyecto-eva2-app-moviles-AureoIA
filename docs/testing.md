@@ -2,7 +2,7 @@
 
 ## 1. Qué hay
 
-**216 pruebas en 14 archivos**, ~3 segundos de ejecución.
+**186 pruebas en 13 archivos**, ~4 segundos de ejecución.
 
 ```bash
 npm test                 # suite completa
@@ -13,16 +13,15 @@ npm run typecheck        # tipos, sin generar archivos
 
 | Archivo | Qué verifica |
 |---|---|
-| `domain/__tests__/diario.test.ts` | Reglas R1–R10, cálculo de resultado, fusión |
+| `domain/__tests__/diario.test.ts` | Reglas R1–R9, cálculo de resultado, inmutabilidad |
 | `domain/__tests__/validacion.test.ts` | El guardián de las dos fronteras |
-| `storage/__tests__/operacionesStorage.test.ts` | Persistencia y lectura defensiva |
+| `storage/__tests__/operacionesStorage.test.ts` | Persistencia, lectura defensiva y separación por usuario |
 | `api/__tests__/cliente.test.ts` | HTTPS, códigos de estado, red, timeout |
 | `api/__tests__/cotizacionApi.test.ts` | Validación del precio, ausencia de credenciales |
-| `api/__tests__/sincronizacionApi.test.ts` | POST/PUT/GET, 404, datos alterados |
 | `services/__tests__/interpretes.test.ts` | Decisiones de cámara y GPS |
 | `services/__tests__/camaraService.test.ts` | Flujo completo de captura |
 | `services/__tests__/ubicacionService.test.ts` | Flujo completo de ubicación |
-| `context/__tests__/DiarioContext.test.tsx` | Coordinación memoria–dispositivo–servidor |
+| `context/__tests__/DiarioContext.test.tsx` | Coordinación memoria–dispositivo y cambio de usuario |
 | `hooks/__tests__/useCotizacion.test.ts` | Consulta, error y refresco |
 | `components/__tests__/CapturaUbicacion.test.tsx` | Interacción real en pantalla |
 | `utils/__tests__/formato.test.ts` | Formateo de precios, fechas y números |
@@ -52,8 +51,7 @@ importan:
 | GPS que nunca fija posición | Bajar a un sótano y esperar |
 | Permiso denegado para siempre | Reinstalar la app y negar dos veces |
 | Servidor que devuelve 503 | Que el servicio real se caiga justo ahora |
-| Respaldo alterado por un tercero | Que alguien modifique el objeto remoto |
-| Sin conexión a mitad de una subida | Cortar el WiFi en el instante exacto |
+| Sin conexión a mitad de una consulta | Cortar el WiFi en el instante exacto |
 
 Todo se sustituye en `jest.setup.js`: AsyncStorage por su implementación en memoria,
 `expo-image-picker` y `expo-location` por funciones simuladas, y `fetch` en cada archivo que
@@ -101,9 +99,8 @@ it('no envía ninguna credencial: no hay secretos que filtrar', async () => {
 });
 ```
 
-Sobre la manipulación de datos externos: que un respaldo con registros alterados no contamine
-el diario, que la fusión no genere duplicados, y que la versión local prevalezca sobre la
-remota.
+Sobre la manipulación de datos externos: que una respuesta con un precio inválido se rechace
+aunque el servidor conteste 200, y que un cuerpo que no es JSON no reviente la app.
 
 ## 6. El defecto que encontraron las pruebas
 
@@ -153,7 +150,7 @@ valor de retorno.
 | `context` | 97 % |
 | `storage` | 96 % |
 | `hooks` | 95 % |
-| **Global** | **64 %** |
+| **Global** | **63 %** |
 
 ## 8. Qué NO se prueba, y por qué
 
@@ -169,7 +166,7 @@ valor de retorno.
 La excepción es `CapturaUbicacion`, que se prueba de punta a punta —pulsación en pantalla →
 coordenadas mostradas— porque concentra interacción real con un periférico.
 
-Por eso la cifra global de 64 % no representa el estado del proyecto: **la lógica está sobre
+Por eso la cifra global de 63 % no representa el estado del proyecto: **la lógica está sobre
 el 95 %**, y lo que baja el promedio es código declarativo de presentación.
 
 ## 9. Regla para quien siga el proyecto
@@ -178,7 +175,7 @@ Toda lógica nueva en `domain/`, `api/`, `services/`, `storage/`, `hooks/` o `co
 con sus pruebas, y esas capas se mantienen sobre el 95 %. Las pruebas cubren **los caminos de
 fallo, no solo el feliz**. `npm test` y `npm run typecheck` pasan antes de cada commit.
 
-Está escrito como reglas 22 a 25 en [`../AGENTS.md`](../AGENTS.md).
+Está escrito como reglas 23 a 26 en [`../AGENTS.md`](../AGENTS.md).
 
 ---
 

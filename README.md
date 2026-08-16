@@ -32,9 +32,10 @@ de aprendizaje de la unidad:
 - **Cámara y galería** para adjuntar la foto del gráfico a cada operación.
 - **GPS** para registrar dónde se anotó cada operación.
 - **Cotización real del oro** consultada a una API pública.
-- **Respaldo e importación** del diario contra un servicio web REST.
-- **Almacenamiento local** que permite usar la app completa sin conexión.
-- **216 pruebas automatizadas** que verifican periféricos y APIs.
+- **Almacenamiento local por usuario**: dos personas que compartan el teléfono
+  no ven el diario de la otra.
+- La app funciona completa **sin conexión**.
+- **186 pruebas automatizadas** que verifican periféricos y la API.
 
 ---
 
@@ -48,19 +49,19 @@ src/
 │   ├── diario.ts             Reglas del diario. Funciones puras.
 │   └── validacion.ts         Guardián de los datos que vienen de afuera.
 ├── storage/
-│   ├── operacionesStorage.ts Persistencia del diario en el dispositivo.
-│   └── respaldoStorage.ts    Identificador del último respaldo remoto.
+│   ├── operacionesStorage.ts Persistencia del diario, con clave por usuario.
+│   └── sesionStorage.ts      Sesión activa y clave de cada diario.
 ├── api/
 │   ├── cliente.ts            Cliente HTTP común. Timeout y errores tipados.
-│   ├── cotizacionApi.ts      Precio del oro en vivo.
-│   └── sincronizacionApi.ts  Respaldo e importación del diario.
+│   └── cotizacionApi.ts      Precio del oro en vivo.
 ├── services/
 │   ├── interpretes.ts        Decisiones de los periféricos. Puro, testeable.
 │   ├── camaraService.ts      Cámara y galería.
 │   ├── ubicacionService.ts   GPS.
 │   └── tipos.ts              Resultado de periférico y límite de espera.
 ├── context/
-│   └── DiarioContext.tsx     Estado compartido. Única fuente de verdad.
+│   ├── DiarioContext.tsx     Estado compartido. Única fuente de verdad.
+│   └── SesionContext.tsx     Quién está usando la app.
 ├── hooks/
 │   └── useCotizacion.ts      Consulta y refresco del precio.
 ├── components/               Piezas visuales reutilizables.
@@ -108,9 +109,9 @@ Las razones:
 resuelva la versión compatible con el SDK en lugar de traer la última
 publicada. Versiones: `expo-image-picker` 17.0.11 y `expo-location` 19.0.8.
 
-**Calidad de foto 0.6.** Las imágenes se guardan en el dispositivo y viajan en
-el respaldo; sin comprimir inflan ambos sin aportar detalle útil para lo que se
-captura, que es un gráfico.
+**Calidad de foto 0.6.** Las imágenes se guardan en el dispositivo; sin
+comprimir lo llenan sin aportar detalle útil para lo que se captura, que es un
+gráfico.
 
 **Galería además de cámara.** Un emulador sin cámara configurada, o un usuario
 que prefiere no dar ese permiso, quedarían sin forma de adjuntar nada si la
@@ -141,26 +142,21 @@ opcionales.
 
 ### Integración con servicios web
 
-Dos servicios, ambos **sin clave de acceso, elegidos a propósito**: el
-repositorio es público y una API con credenciales habría exigido guardar un
-secreto que tarde o temprano termina en el historial de commits. No hay nada
-que filtrar porque no hay nada que ocultar. Una prueba verifica que ninguna
-petición lleve cabeceras de autorización.
+Un servicio, **sin clave de acceso, elegido a propósito**: el repositorio es
+público y una API con credenciales habría exigido guardar un secreto que tarde
+o temprano termina en el historial de commits. No hay nada que filtrar porque
+no hay nada que ocultar. Una prueba verifica que ninguna petición lleve
+cabeceras de autorización.
 
-| Servicio               | Uso                                    |
-| ---------------------- | -------------------------------------- |
-| `api.gold-api.com`     | Precio real de XAU/USD                 |
-| `api.restful-api.dev`  | Respaldo e importación del diario      |
+| Servicio           | Uso                    |
+| ------------------ | ---------------------- |
+| `api.gold-api.com` | Precio real de XAU/USD |
 
 **Errores como valor, no como excepción.** En un móvil la red falla
 constantemente; quedarse sin señal es flujo normal, no una situación
 excepcional. Se distinguen cuatro tipos (`red`, `timeout`, `http`, `formato`)
-porque llevan a acciones distintas, y se conserva el código de estado: de
-detectar un 404 depende que un respaldo borrado se vuelva a crear.
-
-**Importar fusiona, no reemplaza.** Reemplazar borraría lo registrado después
-del último respaldo. Ante el mismo `id` gana la versión local, porque el
-dispositivo es la fuente de verdad de lo que el usuario acaba de hacer.
+porque llevan a acciones distintas, y se conserva el código de estado para que
+quien llama pueda reaccionar a cada uno.
 
 **Todo dato entrante se valida.** Una API puede cambiar su contrato sin avisar,
 y un precio inválido llegaría hasta el cálculo de resultados y lo falsearía en
@@ -185,7 +181,7 @@ enteramente con `View`, sin assets externos.
 
 ## 4. Pruebas automatizadas
 
-**216 pruebas en 14 archivos**, ~3 segundos de ejecución. Jest con el preset
+**186 pruebas en 13 archivos**, ~4 segundos de ejecución. Jest con el preset
 `jest-expo`, más React Native Testing Library para lo que necesita montar
 componentes.
 
@@ -213,7 +209,7 @@ un servidor que devuelve 503, un permiso denegado para siempre—.
 | `storage`  | 96 %      |
 | `hooks`    | 95 %      |
 
-La cobertura global es 64 %: las pantallas y la mayoría de componentes visuales
+La cobertura global es 63 %: las pantallas y la mayoría de componentes visuales
 no tienen pruebas. Fue **deliberado** — la rúbrica evalúa la fiabilidad de los
 periféricos y de la integración con APIs, no la disposición de elementos en
 pantalla, y las pruebas de renderizado son caras de mantener y frágiles ante
@@ -241,18 +237,19 @@ también en una referencia que se actualiza de inmediato.
 
 Documentadas a conciencia, no omitidas:
 
-- **El servicio de respaldo es público y sin autenticación.** Quien conozca el
-  identificador de un respaldo puede leerlo o borrarlo. Sirve para demostrar la
-  integración REST, que es lo que evalúa la unidad, pero no para datos reales.
-  El diario es de operaciones simuladas. La app advierte esto en pantalla.
-- **La autenticación es local.** El login valida campos y da respuesta visual,
-  pero no verifica contra un servidor ni separa datos por usuario.
-- **Las fotos no viajan al respaldo.** Se guarda la ruta local de la imagen, no
-  la imagen. Al importar en otro teléfono las operaciones llegan completas pero
-  sin sus fotos.
-- **Dependencia de servicios gratuitos de terceros.** Mitigado por diseño: el
-  diario funciona completo sin conexión y la caída de cualquier servicio degrada
-  la experiencia sin impedir el uso.
+- **No hay respaldo remoto.** Se implementó y se retiró: los servicios de
+  almacenamiento JSON anónimos y gratuitos resultaron inviables. El que se usaba
+  rechaza cuerpos mayores a ~1 KB y limita a 50 peticiones cada 24 horas, y las
+  cinco alternativas evaluadas exigen credenciales o bloquean el acceso. Hacerlo
+  bien requiere un backend con autenticación, que excede el alcance de la unidad.
+  El diario vive en el dispositivo.
+- **La autenticación es local.** El login separa los diarios por usuario, pero
+  no verifica credenciales contra ningún servidor: cualquier contraseña entra.
+  Su función es que dos personas compartan el teléfono sin mezclar datos, no
+  impedir el acceso.
+- **Dependencia de un servicio gratuito de terceros** para la cotización.
+  Mitigado por diseño: el diario funciona completo sin conexión y la caída del
+  servicio degrada la experiencia sin impedir el uso.
 
 ---
 
@@ -352,7 +349,7 @@ su propio índice y orden de lectura:
 | --------- | ------------ |
 | [`docs/brief.md`](./docs/brief.md) | El problema en nuestras palabras y qué queda fuera |
 | [`docs/mvp.md`](./docs/mvp.md) | Alcance, historias de usuario y definición de "terminado" |
-| [`docs/domain.md`](./docs/domain.md) | La operación, sus estados y las reglas R1–R10 |
+| [`docs/domain.md`](./docs/domain.md) | La operación, sus estados y las reglas R1–R9 |
 | [`docs/stack.md`](./docs/stack.md) | Tecnologías elegidas y alternativas descartadas |
 | [`docs/architecture.md`](./docs/architecture.md) | Capas, periféricos, red, estado y deuda técnica |
 | [`docs/design.md`](./docs/design.md) | Paleta, tipografía, formatos y tono |

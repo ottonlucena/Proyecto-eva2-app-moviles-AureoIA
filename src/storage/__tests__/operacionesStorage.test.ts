@@ -1,11 +1,10 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
   cargarOperaciones,
-  CLAVE_OPERACIONES,
   guardarOperaciones,
   parsearOperaciones,
 } from '../operacionesStorage';
-import { cargarRespaldo, guardarRespaldo, parsearRespaldo } from '../respaldoStorage';
+import { claveDiario, normalizarUsuario } from '../sesionStorage';
 import type { Operacion } from '../../types/operacion';
 
 /**
@@ -55,20 +54,20 @@ describe('parsearOperaciones', () => {
 
 describe('ciclo de guardado y lectura', () => {
   it('lo guardado se recupera igual', async () => {
-    await guardarOperaciones([operacion]);
+    await guardarOperaciones('ana@mail.com', [operacion]);
 
-    expect(await cargarOperaciones()).toEqual([operacion]);
+    expect(await cargarOperaciones('ana@mail.com')).toEqual([operacion]);
   });
 
   it('un diario nuevo empieza vacío', async () => {
-    expect(await cargarOperaciones()).toEqual([]);
+    expect(await cargarOperaciones('nadie@mail.com')).toEqual([]);
   });
 
   it('guardar reemplaza el diario anterior', async () => {
-    await guardarOperaciones([operacion]);
-    await guardarOperaciones([]);
+    await guardarOperaciones('ana@mail.com', [operacion]);
+    await guardarOperaciones('ana@mail.com', []);
 
-    expect(await cargarOperaciones()).toEqual([]);
+    expect(await cargarOperaciones('ana@mail.com')).toEqual([]);
   });
 
   it('conserva los adjuntos de los periféricos', async () => {
@@ -78,47 +77,49 @@ describe('ciclo de guardado y lectura', () => {
       ubicacion: { latitud: -33.4489, longitud: -70.6693 },
     };
 
-    await guardarOperaciones([conAdjuntos]);
-    const [recuperada] = await cargarOperaciones();
+    await guardarOperaciones('ana@mail.com', [conAdjuntos]);
+    const [recuperada] = await cargarOperaciones('ana@mail.com');
 
     expect(recuperada.fotoUri).toBe('file:///foto.jpg');
     expect(recuperada.ubicacion).toEqual({ latitud: -33.4489, longitud: -70.6693 });
   });
 
   it('descarta lo corrupto que hubiera dejado otra versión de la app', async () => {
-    await AsyncStorage.setItem(CLAVE_OPERACIONES, 'basura que no es json');
+    await AsyncStorage.setItem(claveDiario('ana@mail.com'), 'basura que no es json');
 
-    expect(await cargarOperaciones()).toEqual([]);
+    expect(await cargarOperaciones('ana@mail.com')).toEqual([]);
   });
 });
 
-describe('datos del respaldo remoto', () => {
-  it('conserva el identificador y la fecha', async () => {
-    await guardarRespaldo({ idRemoto: 'abc', ultimaSincronizacion: '2026-08-16T10:00:00.000Z' });
+describe('separación por usuario', () => {
+  it('el diario de uno no aparece en el del otro', async () => {
+    await guardarOperaciones('ana@mail.com', [operacion]);
 
-    expect(await cargarRespaldo()).toEqual({
-      idRemoto: 'abc',
-      ultimaSincronizacion: '2026-08-16T10:00:00.000Z',
-    });
+    expect(await cargarOperaciones('beto@mail.com')).toEqual([]);
   });
 
-  it('sin respaldo previo devuelve indefinido', async () => {
-    expect(await cargarRespaldo()).toBeUndefined();
+  it('cada usuario escribe en su propia clave', async () => {
+    await guardarOperaciones('ana@mail.com', [operacion]);
+    await guardarOperaciones('beto@mail.com', []);
+
+    expect(await AsyncStorage.getItem(claveDiario('ana@mail.com'))).toContain('op-1');
+    expect(await AsyncStorage.getItem(claveDiario('beto@mail.com'))).toBe('[]');
   });
 
-  it.each([
-    ['nada', null],
-    ['JSON roto', '{roto'],
-    ['sin identificador', '{"ultimaSincronizacion":"x"}'],
-    ['identificador vacío', '{"idRemoto":""}'],
-  ])('rechaza un respaldo %s: un id inválido no sirve para recuperar nada', (_caso, crudo) => {
-    expect(parsearRespaldo(crudo)).toBeUndefined();
+  it('el mismo correo con otras mayúsculas o espacios es la misma cuenta', () => {
+    expect(claveDiario('Ana@Mail.com')).toBe(claveDiario('  ana@mail.com  '));
   });
 
-  it('tolera que falte la fecha, que es informativa', () => {
-    expect(parsearRespaldo('{"idRemoto":"abc"}')).toEqual({
-      idRemoto: 'abc',
-      ultimaSincronizacion: '',
-    });
+  it('sin usuario se usa la clave histórica, para no perder datos previos', async () => {
+    // Es donde quedó el diario de quien usó la app antes de que hubiera cuentas.
+    expect(claveDiario(undefined)).toBe('@aureo:operaciones');
+    expect(claveDiario('')).toBe('@aureo:operaciones');
+
+    await guardarOperaciones(undefined, [operacion]);
+    expect(await cargarOperaciones(undefined)).toEqual([operacion]);
+  });
+
+  it('normalizarUsuario recorta y pasa a minúsculas', () => {
+    expect(normalizarUsuario('  Otton@Mail.COM ')).toBe('otton@mail.com');
   });
 });

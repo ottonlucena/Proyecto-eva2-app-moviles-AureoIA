@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import Boton from '../components/Boton';
 import CampoTexto from '../components/CampoTexto';
+import { useSesion } from '../context/SesionContext';
 import { colors } from '../theme/colors';
 import { fontSize, spacing } from '../theme/spacing';
 import type { RootStackParamList } from '../navigation/types';
@@ -16,6 +17,7 @@ import type { RootStackParamList } from '../navigation/types';
 type LoginScreenProps = NativeStackScreenProps<RootStackParamList, 'Login'>;
 
 function LoginScreen({ navigation }: LoginScreenProps): React.JSX.Element {
+  const { iniciarSesion } = useSesion();
   const [usuario, setUsuario] = useState('');
   const [contrasena, setContrasena] = useState('');
   const [errorUsuario, setErrorUsuario] = useState<string | undefined>();
@@ -32,9 +34,13 @@ function LoginScreen({ navigation }: LoginScreenProps): React.JSX.Element {
 
     if (hayErrorUsuario || hayErrorContrasena) return;
 
-    // `replace` en lugar de `navigate`: una vez dentro, el gesto de volver no
-    // debe devolver al formulario de acceso.
-    navigation.replace('Diario');
+    // Al iniciar sesión se carga el diario de este usuario. Dos personas que
+    // compartan el teléfono no ven las operaciones de la otra.
+    void iniciarSesion(usuario).then(() => {
+      // `replace` en lugar de `navigate`: una vez dentro, el gesto de volver
+      // no debe devolver al formulario de acceso.
+      navigation.replace('Diario');
+    });
   }
 
   return (

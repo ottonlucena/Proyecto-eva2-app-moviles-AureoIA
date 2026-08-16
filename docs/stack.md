@@ -13,7 +13,6 @@
 | Ubicación | `expo-location` | 19.0.8 |
 | Pruebas | Jest + preset `jest-expo` + RNTL | 29.7 |
 | Cotización | `api.gold-api.com` | pública, sin clave |
-| Respaldo | `api.restful-api.dev` | pública, sin clave |
 
 ## 1. Framework: Expo, no Ionic
 
@@ -83,9 +82,9 @@ JSON bajo una clave. No hay consultas, ni relaciones, ni índices que justifique
 **Lo que descartamos:** `expo-sqlite`. Habría aportado consultas que esta app no hace, a
 cambio de esquemas y migraciones que sí habría que mantener.
 
-## 7. APIs externas: públicas y sin credenciales
+## 7. API externa: pública y sin credenciales
 
-Ambos servicios se eligieron **deliberadamente entre los que no requieren clave de acceso**.
+El servicio se eligió **deliberadamente entre los que no requieren clave de acceso**.
 
 El repositorio es público. Una API con credenciales habría exigido guardar un secreto que,
 tarde o temprano, termina en el historial de commits —y en una app móvil el secreto además
@@ -96,12 +95,15 @@ cabeceras de autorización ni claves en la URL.
 | Servicio | Rol | Verbos usados |
 |---|---|---|
 | `api.gold-api.com/price/XAU` | Precio real del oro | GET |
-| `api.restful-api.dev/objects` | Respaldo del diario | GET, POST, PUT |
 
-**Lo que descartamos:** Firebase y Supabase. Ambos habrían resuelto además la autenticación,
-pero exigen credenciales en el código y una cuenta que puede caducar antes de que el trabajo
-sea corregido. Un backend propio también se descartó: es otra asignatura, y la evaluación
-mide la calidad de la integración **del cliente móvil**, no la del servidor.
+**Sobre el respaldo remoto que no está.** Se implementó contra `api.restful-api.dev` y se
+retiró tras medir sus límites reales: rechaza cuerpos mayores a ~1 KB y admite 50 peticiones
+cada 24 horas. Se evaluaron cinco alternativas anónimas —jsonblob, npoint, extendsclass,
+kvdb y textdb— y todas exigen credenciales, bloquean el acceso o fallan en silencio.
+Firebase y Supabase sí funcionarían, pero requieren una cuenta viva al momento de la
+corrección. Un backend propio se descartó desde el principio: es otra asignatura, y la
+evaluación mide la integración **del cliente móvil**, no la del servidor. La conclusión está
+documentada como deuda técnica en [`architecture.md`](./architecture.md).
 
 ## 8. Pruebas: Jest con preset `jest-expo`
 

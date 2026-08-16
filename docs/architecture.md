@@ -127,21 +127,9 @@ la pantalla queda esperando para siempre.
 | Solo HTTPS, verificado antes de conectar | Los datos nunca llegan a viajar en claro |
 | Timeout de 10 s con `AbortController` | Aborta de verdad, no solo ignora la respuesta tardía |
 | Errores tipados en 4 clases | Cada uno lleva a una acción distinta del usuario |
-| Se conserva el código HTTP | De detectar un 404 depende recrear un respaldo borrado |
+| Se conserva el código HTTP | Cada estado lleva a una acción distinta de quien llama |
 | Todo dato entrante se valida | Una API puede cambiar su contrato sin avisar |
 | Cero credenciales | El repositorio es público |
-
-### Fusión al importar
-
-Importar **no reemplaza** el diario local: lo fusiona. Reemplazar borraría todo lo registrado
-después del último respaldo. Ante el mismo `id` en ambos lados **gana la versión local**,
-porque el dispositivo es la fuente de verdad de lo que el usuario acaba de hacer, mientras
-que el respaldo puede ser de hace días.
-
-### Respaldo desaparecido
-
-Si el objeto remoto fue borrado, el 404 se maneja explícitamente: **al subir** se crea uno
-nuevo; **al bajar** se olvida el identificador muerto en vez de reintentar eternamente.
 
 ## 7. Dónde vive el estado
 
@@ -173,12 +161,9 @@ El defecto lo encontró una prueba. Ver [`testing.md`](./testing.md).
 | Falla | Qué hace la app |
 |---|---|
 | Sin red al consultar el precio | Muestra el error y ofrece reintentar. Si ya había un precio, lo conserva |
-| Sin red al respaldar | Informa y no toca el diario local |
 | Permiso denegado | Explica; si es definitivo, ofrece los ajustes |
 | GPS sin señal | Se rinde a los 15 s con «Probá al aire libre» |
 | Datos corruptos en el dispositivo | Descarta lo inválido y conserva lo válido |
-| Respaldo alterado por terceros | Valida operación por operación y descarta lo que no cumple |
-| Respaldo borrado del servidor | Crea uno nuevo al subir; olvida el id al bajar |
 
 El principio común: **degradar, no romper**. El diario siempre sigue usable.
 
@@ -188,21 +173,22 @@ El principio común: **degradar, no romper**. El diario siempre sigue usable.
 src/
 ├── types/operacion.ts
 ├── domain/
-│   ├── diario.ts             Reglas R1–R10
+│   ├── diario.ts             Reglas R1–R9
 │   └── validacion.ts         Guardián de las dos fronteras
 ├── storage/
-│   ├── operacionesStorage.ts
-│   └── respaldoStorage.ts
+│   ├── operacionesStorage.ts  Clave por usuario
+│   └── sesionStorage.ts
 ├── api/
 │   ├── cliente.ts            Timeout, HTTPS, errores tipados
-│   ├── cotizacionApi.ts
-│   └── sincronizacionApi.ts
+│   └── cotizacionApi.ts
 ├── services/
 │   ├── interpretes.ts        Puro. Se prueba sin dispositivo
 │   ├── camaraService.ts
 │   ├── ubicacionService.ts
 │   └── tipos.ts              ResultadoPeriferico y conTimeout
-├── context/DiarioContext.tsx
+├── context/
+│   ├── DiarioContext.tsx
+│   └── SesionContext.tsx
 ├── hooks/useCotizacion.ts
 ├── components/
 ├── screens/
@@ -217,9 +203,8 @@ Las pruebas viven en `__tests__/` dentro de la carpeta que prueban.
 
 | Deuda | Por qué se asumió | Qué haría falta |
 |---|---|---|
-| El respaldo es público y sin autenticación | Demuestra la integración REST sin credenciales en un repo público. El diario es simulado. La app lo advierte en pantalla | Backend propio con auth por usuario |
-| La autenticación es local | La rúbrica de la unidad no la evalúa | Verificación contra servidor y clave de storage por usuario |
-| Las fotos no viajan al respaldo | Se guarda la ruta local, no la imagen. Subirlas multiplicaría el tamaño | Codificar y subir a almacenamiento de objetos |
+| No hay respaldo remoto | Se implementó contra `api.restful-api.dev` y se retiró: rechaza cuerpos mayores a ~1 KB y limita a 50 peticiones cada 24 h. Cinco alternativas anónimas evaluadas exigen credenciales o bloquean | Backend propio, o Supabase con su clave anónima y RLS |
+| La autenticación es local | La rúbrica de la unidad no la evalúa. Sí separa los diarios por usuario, que es lo que pide el enunciado | Verificación de credenciales contra un servidor |
 | Pantallas sin pruebas de renderizado | Caras de mantener y frágiles ante cambios de diseño | Pruebas de interacción en las pantallas críticas |
 | Sin ESLint | El typecheck estricto y las reglas de `AGENTS.md` cubren lo esencial | Configurar `eslint-config-expo` |
 

@@ -180,4 +180,6 @@ mismo commit. Documentación desactualizada es peor que no tenerla.
 ## 11. Qué NO versionar
 
 - `node_modules/`, `coverage/`, `.expo/`
-- `entrega/*.docx` y `entrega/*.pdf` — se generan desde `entrega/informe-evu2.fodt`.
+- `entrega/` completa — informe, capturas y documentos generados. Es material de
+  la entrega, no del código, y se conserva solo en local.
+- Cualquier `*.pdf`.

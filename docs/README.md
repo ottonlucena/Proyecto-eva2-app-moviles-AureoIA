@@ -20,11 +20,12 @@ cómo está hecha.
 
 - ✅ Análisis y diseño completos.
 - ✅ Implementación completa: diario, periféricos, integración web y pruebas.
-- ⏳ Pendiente: verificación en dispositivo físico y capturas para el informe.
-  Ver [`../entrega/capturas-pendientes.md`](../entrega/capturas-pendientes.md).
+- ✅ Verificado en dispositivo físico: cámara, GPS, cotización y persistencia.
 
 ## Documentos relacionados fuera de esta carpeta
 
 - [`../README.md`](../README.md) — puerta de entrada del repositorio y cómo ejecutarlo.
 - [`../AGENTS.md`](../AGENTS.md) — reglas que debe respetar todo agente de IA que toque el código.
-- [`../entrega/`](../entrega/) — informe de la evaluación y guía de capturas.
+
+El informe de la evaluación y sus capturas se mantienen en una carpeta `entrega/` local,
+fuera del repositorio.

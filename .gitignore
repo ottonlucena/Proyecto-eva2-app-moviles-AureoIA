@@ -43,7 +43,10 @@ yarn-error.*
 # cobertura de pruebas
 coverage/
 
-# entregables generados desde entrega/informe-evu2.fodt
-# se versiona solo la fuente en ODF plano, no lo que sale de ella
-entrega/*.docx
-entrega/*.pdf
+# material de la entrega: informe, capturas y documentos generados.
+# Queda fuera del repositorio a proposito: son archivos pesados y binarios
+# que no aportan al codigo, y el informe se entrega por la plataforma.
+entrega/
+
+# ningun documento PDF se versiona
+*.pdf

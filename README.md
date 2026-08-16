@@ -357,13 +357,13 @@ su propio índice y orden de lectura:
 
 ## 10. Entrega
 
-En [`entrega/`](./entrega/):
+El informe de la evaluación, sus capturas y los documentos generados viven en
+una carpeta `entrega/` **local, fuera del control de versiones**. Son archivos
+pesados y binarios que no aportan al código, y el informe se entrega por la
+plataforma de la asignatura, no por el repositorio.
 
-- `informe-evu2.fodt` — fuente del informe en ODF plano. **Es lo único versionado.**
-- `capturas-pendientes.md` — guía de las 16 capturas: dónde tomarlas y qué debe
-  verse en cada una.
-
-Los entregables se generan desde la fuente y quedan fuera del repositorio:
+La fuente del informe está en formato ODF plano y los entregables se generan
+desde ella:
 
 ```bash
 soffice --headless --convert-to docx entrega/informe-evu2.fodt --outdir entrega

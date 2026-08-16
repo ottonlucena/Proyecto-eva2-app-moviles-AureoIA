@@ -1,5 +1,8 @@
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import { calcularResultado } from '../domain/diario';
+// Se importa del módulo puro: la lista solo formatea coordenadas, no necesita
+// arrastrar el módulo nativo de GPS.
+import { formatearUbicacion } from '../services/interpretes';
 import { colors } from '../theme/colors';
 import { borderWidth, fontSize, letterSpacing, opacity, radius, spacing } from '../theme/spacing';
 import type { Operacion } from '../types/operacion';
@@ -43,11 +46,30 @@ function OperacionItem({
         {formatearLotes(operacion.lotes)} · {formatearFecha(operacion.fechaCreacion)}
       </Text>
 
-      {operacion.notas.length > 0 && (
-        <Text style={styles.notas} numberOfLines={2}>
-          {operacion.notas}
-        </Text>
-      )}
+      <View style={styles.cuerpo}>
+        {operacion.fotoUri !== undefined && (
+          <Image
+            source={{ uri: operacion.fotoUri }}
+            style={styles.miniatura}
+            resizeMode="cover"
+            accessibilityLabel="Foto adjunta a la operación"
+          />
+        )}
+
+        <View style={styles.textos}>
+          {operacion.notas.length > 0 && (
+            <Text style={styles.notas} numberOfLines={2}>
+              {operacion.notas}
+            </Text>
+          )}
+
+          {operacion.ubicacion !== undefined && (
+            <Text style={styles.ubicacion} numberOfLines={1}>
+              {formatearUbicacion(operacion.ubicacion)}
+            </Text>
+          )}
+        </View>
+      </View>
 
       <View style={styles.pie}>
         <Pressable
@@ -119,9 +141,28 @@ const styles = StyleSheet.create({
     color: colors.textoTenue,
     fontSize: fontSize.xs,
   },
+  cuerpo: {
+    flexDirection: 'row',
+    gap: spacing.sm,
+  },
+  miniatura: {
+    width: spacing.xxl + spacing.md,
+    height: spacing.xxl + spacing.md,
+    borderRadius: radius.sm,
+    backgroundColor: colors.superficieAlta,
+  },
+  textos: {
+    flex: 1,
+    gap: spacing.xs,
+    justifyContent: 'center',
+  },
   notas: {
     color: colors.texto,
     fontSize: fontSize.sm,
+  },
+  ubicacion: {
+    color: colors.secundario,
+    fontSize: fontSize.xs,
   },
   pie: {
     flexDirection: 'row',

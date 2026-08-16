@@ -13,7 +13,12 @@
       "backgroundColor": "#0B0E11"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSCameraUsageDescription": "Áureo usa la cámara para que adjuntes una foto del gráfico a cada operación de tu diario.",
+        "NSPhotoLibraryUsageDescription": "Áureo accede a tus fotos para que adjuntes una captura ya guardada a una operación.",
+        "NSLocationWhenInUseUsageDescription": "Áureo registra dónde anotaste cada operación. Solo se consulta mientras usás la app."
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -21,10 +26,31 @@
         "backgroundColor": "#0B0E11"
       },
       "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.ACCESS_COARSE_LOCATION",
+        "android.permission.ACCESS_FINE_LOCATION"
+      ]
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": [
+      [
+        "expo-image-picker",
+        {
+          "cameraPermission": "Áureo usa la cámara para que adjuntes una foto del gráfico a cada operación.",
+          "photosPermission": "Áureo accede a tus fotos para que adjuntes una captura ya guardada."
+        }
+      ],
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Áureo registra dónde anotaste cada operación. Solo se consulta mientras usás la app.",
+          "isAndroidBackgroundLocationEnabled": false
+        }
+      ]
+    ]
   }
 }

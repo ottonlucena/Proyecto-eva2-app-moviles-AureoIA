@@ -12,13 +12,15 @@ import {
 import BannerCotizacion from '../components/BannerCotizacion';
 import Boton from '../components/Boton';
 import CampoTexto from '../components/CampoTexto';
+import CapturaFoto from '../components/CapturaFoto';
+import CapturaUbicacion from '../components/CapturaUbicacion';
 import SelectorTipo from '../components/SelectorTipo';
 import { useDiario } from '../context/DiarioContext';
 import { useCotizacion } from '../hooks/useCotizacion';
 import { colors } from '../theme/colors';
 import { fontSize, spacing } from '../theme/spacing';
 import type { RootStackParamList } from '../navigation/types';
-import type { DatosOperacion, TipoOperacion } from '../types/operacion';
+import type { DatosOperacion, TipoOperacion, Ubicacion } from '../types/operacion';
 import { parsearNumero } from '../utils/formato';
 
 type OperacionFormScreenProps = NativeStackScreenProps<RootStackParamList, 'OperacionForm'>;
@@ -52,6 +54,10 @@ function OperacionFormScreen({
   const [precioSalida, setPrecioSalida] = useState(aTexto(operacionExistente?.precioSalida));
   const [lotes, setLotes] = useState(aTexto(operacionExistente?.lotes) || '1');
   const [notas, setNotas] = useState(operacionExistente?.notas ?? '');
+  const [fotoUri, setFotoUri] = useState<string | undefined>(operacionExistente?.fotoUri);
+  const [ubicacion, setUbicacion] = useState<Ubicacion | undefined>(
+    operacionExistente?.ubicacion,
+  );
   const [errores, setErrores] = useState<ErroresFormulario>({});
   const [guardando, setGuardando] = useState(false);
 
@@ -97,6 +103,10 @@ function OperacionFormScreen({
       lotes: lotesNumero,
       notas: notas.trim(),
       ...(salidaNumero !== undefined ? { precioSalida: salidaNumero } : {}),
+      // Los adjuntos de los periféricos solo se incluyen si existen: guardar
+      // `undefined` explícito ensuciaría el JSON del respaldo remoto.
+      ...(fotoUri !== undefined ? { fotoUri } : {}),
+      ...(ubicacion !== undefined ? { ubicacion } : {}),
     };
   }
 
@@ -206,6 +216,18 @@ function OperacionFormScreen({
           onChangeText={setNotas}
           placeholder="¿Por qué entraste? ¿Qué viste en el gráfico?"
           multiline
+        />
+
+        <CapturaFoto
+          etiqueta="Foto del gráfico"
+          fotoUri={fotoUri}
+          onCambiar={setFotoUri}
+        />
+
+        <CapturaUbicacion
+          etiqueta="¿Dónde registraste la operación?"
+          ubicacion={ubicacion}
+          onCambiar={setUbicacion}
         />
 
         <View style={styles.acciones}>

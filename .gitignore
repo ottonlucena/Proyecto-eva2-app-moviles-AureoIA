@@ -43,3 +43,6 @@ yarn-error.*
 # material de la evaluacion (enunciado y rubrica) - solo referencia local
 docs-evaluacion/
 *.pdf
+
+# cobertura de pruebas
+coverage/

@@ -4,6 +4,7 @@ import {
   useContext,
   useEffect,
   useMemo,
+  useRef,
   useState,
   type ReactNode,
 } from 'react';
@@ -71,6 +72,23 @@ export function DiarioProvider({ children }: DiarioProviderProps): React.JSX.Ele
   const [respaldo, setRespaldo] = useState<DatosRespaldo | undefined>();
   const [sincronizando, setSincronizando] = useState(false);
 
+  /**
+   * Copia siempre actual del diario.
+   *
+   * React no ejecuta el actualizador de estado en el momento de llamarlo, así
+   * que leer la lista desde ahí para persistirla guardaba el valor anterior.
+   * La referencia se actualiza de forma inmediata, lo que da un valor fiable
+   * tanto para escribir en el dispositivo como para dos acciones seguidas.
+   */
+  const diarioActual = useRef<Operacion[]>([]);
+
+  /** Deja la lista en memoria, en la referencia y en el dispositivo. */
+  const asentarDiario = useCallback(async (siguiente: Operacion[]): Promise<void> => {
+    diarioActual.current = siguiente;
+    setOperaciones(siguiente);
+    await guardarOperaciones(siguiente);
+  }, []);
+
   useEffect(() => {
     let vigente = true;
 
@@ -81,6 +99,7 @@ export function DiarioProvider({ children }: DiarioProviderProps): React.JSX.Ele
       ]);
       // La pantalla pudo desmontarse mientras se leía el almacenamiento.
       if (!vigente) return;
+      diarioActual.current = guardadas;
       setOperaciones(guardadas);
       setRespaldo(datosRespaldo);
       setCargando(false);
@@ -93,23 +112,11 @@ export function DiarioProvider({ children }: DiarioProviderProps): React.JSX.Ele
     };
   }, []);
 
-  /**
-   * Aplica un cambio al diario y lo persiste. El estado se actualiza a partir
-   * del valor previo para no perder cambios si se disparan dos acciones
-   * seguidas, y se guarda la misma lista que quedó en memoria.
-   */
+  /** Aplica un cambio al diario y lo persiste. */
   const aplicarCambio = useCallback(
-    async (transformar: (previas: readonly Operacion[]) => Operacion[]): Promise<void> => {
-      let resultado: Operacion[] = [];
-
-      setOperaciones((previas) => {
-        resultado = transformar(previas);
-        return resultado;
-      });
-
-      await guardarOperaciones(resultado);
-    },
-    [],
+    (transformar: (previas: readonly Operacion[]) => Operacion[]): Promise<void> =>
+      asentarDiario(transformar(diarioActual.current)),
+    [asentarDiario],
   );
 
   const registrar = useCallback(
@@ -144,13 +151,14 @@ export function DiarioProvider({ children }: DiarioProviderProps): React.JSX.Ele
    */
   const respaldar = useCallback(async (): Promise<ResultadoSincronizacion> => {
     setSincronizando(true);
+    const aSubir = diarioActual.current;
 
     try {
-      let resultado = await subirDiario(operaciones, respaldo?.idRemoto);
+      let resultado = await subirDiario(aSubir, respaldo?.idRemoto);
 
       if (!resultado.ok && resultado.error.codigoHttp === 404) {
         await borrarRespaldo();
-        resultado = await subirDiario(operaciones);
+        resultado = await subirDiario(aSubir);
       }
 
       if (!resultado.ok) {
@@ -165,7 +173,7 @@ export function DiarioProvider({ children }: DiarioProviderProps): React.JSX.Ele
       await guardarRespaldo(datos);
       setRespaldo(datos);
 
-      const cantidad = operaciones.length;
+      const cantidad = aSubir.length;
       return {
         ok: true,
         mensaje: `Se respaldaron ${cantidad} ${cantidad === 1 ? 'operación' : 'operaciones'} en la nube.`,
@@ -173,7 +181,7 @@ export function DiarioProvider({ children }: DiarioProviderProps): React.JSX.Ele
     } finally {
       setSincronizando(false);
     }
-  }, [operaciones, respaldo]);
+  }, [respaldo]);
 
   /**
    * Baja el diario remoto y lo combina con el local.
@@ -203,11 +211,11 @@ export function DiarioProvider({ children }: DiarioProviderProps): React.JSX.Ele
         return { ok: false, mensaje: resultado.error.mensaje };
       }
 
-      const nuevas = contarNuevasDesdeRemoto(operaciones, resultado.datos);
-      const fusionadas = fusionarDiarios(operaciones, resultado.datos);
+      const locales = diarioActual.current;
+      const nuevas = contarNuevasDesdeRemoto(locales, resultado.datos);
+      const fusionadas = fusionarDiarios(locales, resultado.datos);
 
-      setOperaciones(fusionadas);
-      await guardarOperaciones(fusionadas);
+      await asentarDiario(fusionadas);
 
       return {
         ok: true,
@@ -219,7 +227,7 @@ export function DiarioProvider({ children }: DiarioProviderProps): React.JSX.Ele
     } finally {
       setSincronizando(false);
     }
-  }, [operaciones, respaldo]);
+  }, [asentarDiario, respaldo]);
 
   const valor = useMemo<DiarioContextValor>(
     () => ({

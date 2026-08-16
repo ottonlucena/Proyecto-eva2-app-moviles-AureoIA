@@ -101,6 +101,41 @@ export function contarAbiertas(operaciones: readonly Operacion[]): number {
   return operaciones.filter((operacion) => operacion.estado === 'abierta').length;
 }
 
+/**
+ * Combina el diario del dispositivo con el que se bajó del servidor.
+ *
+ * Ante un mismo `id` en ambos lados gana el local. El dispositivo es la
+ * fuente de verdad de lo que el usuario acaba de hacer, y el respaldo remoto
+ * puede ser de hace días: si ganara el remoto, restaurar pisaría ediciones
+ * recientes. Las operaciones que solo existen en el servidor se incorporan,
+ * que es el objetivo de importar.
+ *
+ * El resultado queda ordenado de más nueva a más vieja, igual que la lista.
+ */
+export function fusionarDiarios(
+  locales: readonly Operacion[],
+  remotas: readonly Operacion[],
+): Operacion[] {
+  const porId = new Map<string, Operacion>();
+
+  // Primero las remotas, para que las locales las sobrescriban al pasar después.
+  for (const operacion of remotas) porId.set(operacion.id, operacion);
+  for (const operacion of locales) porId.set(operacion.id, operacion);
+
+  return [...porId.values()].sort((a, b) =>
+    b.fechaCreacion.localeCompare(a.fechaCreacion),
+  );
+}
+
+/** Cuántas operaciones del servidor no estaban en el dispositivo. */
+export function contarNuevasDesdeRemoto(
+  locales: readonly Operacion[],
+  remotas: readonly Operacion[],
+): number {
+  const idsLocales = new Set(locales.map((operacion) => operacion.id));
+  return remotas.filter((operacion) => !idsLocales.has(operacion.id)).length;
+}
+
 /** Suma el resultado de todas las operaciones cerradas. */
 export function calcularResultadoTotal(operaciones: readonly Operacion[]): number {
   return operaciones.reduce((total, operacion) => {

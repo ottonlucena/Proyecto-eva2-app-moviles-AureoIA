@@ -1,5 +1,14 @@
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { ActivityIndicator, Alert, FlatList, StyleSheet, Text, View } from 'react-native';
+import { useLayoutEffect } from 'react';
+import {
+  ActivityIndicator,
+  Alert,
+  FlatList,
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import BannerCotizacion from '../components/BannerCotizacion';
 import Boton from '../components/Boton';
 import OperacionItem from '../components/OperacionItem';
@@ -20,6 +29,21 @@ function DiarioScreen({ navigation }: DiarioScreenProps): React.JSX.Element {
 
   const abiertas = contarAbiertas(operaciones);
   const resultadoTotal = calcularResultadoTotal(operaciones);
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <Pressable
+          onPress={() => navigation.navigate('Sincronizacion')}
+          accessibilityRole="button"
+          accessibilityLabel="Respaldo en la nube"
+          hitSlop={spacing.sm}
+        >
+          <Text style={styles.accionEncabezado}>Nube</Text>
+        </Pressable>
+      ),
+    });
+  }, [navigation]);
 
   function abrirFormulario(id?: string): void {
     navigation.navigate('OperacionForm', id === undefined ? undefined : { id });
@@ -165,6 +189,11 @@ const styles = StyleSheet.create({
     color: colors.textoTenue,
     fontSize: fontSize.xs,
     textAlign: 'center',
+  },
+  accionEncabezado: {
+    color: colors.primario,
+    fontSize: fontSize.sm,
+    fontWeight: '600',
   },
   cotizacion: {
     paddingHorizontal: spacing.md,

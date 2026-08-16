@@ -40,12 +40,10 @@ yarn-error.*
 /ios
 /android
 
-# material de la evaluacion (enunciado y rubrica) - solo referencia local
-docs-evaluacion/
-*.pdf
-
 # cobertura de pruebas
 coverage/
 
-# entregables generados desde docs/informe-evu2.fodt
-docs/*.docx
+# entregables generados desde entrega/informe-evu2.fodt
+# se versiona solo la fuente en ODF plano, no lo que sale de ella
+entrega/*.docx
+entrega/*.pdf

@@ -322,13 +322,32 @@ Ambos periféricos se comportan mejor en un teléfono físico con Expo Go.
 
 ---
 
-## 9. Documentación de la evaluación
+## 9. Documentación
 
-El informe de la Unidad 2 se redacta en `docs/informe-evu2.fodt` (ODF plano,
-versionado). Los entregables `.docx` y `.pdf` se generan desde ahí y quedan
-fuera del repositorio:
+El análisis, el diseño y las decisiones técnicas están en [`docs/`](./docs/), con
+su propio índice y orden de lectura:
+
+| Documento | Qué contiene |
+| --------- | ------------ |
+| [`docs/brief.md`](./docs/brief.md) | El problema en nuestras palabras y qué queda fuera |
+| [`docs/mvp.md`](./docs/mvp.md) | Alcance, historias de usuario y definición de "terminado" |
+| [`docs/domain.md`](./docs/domain.md) | La operación, sus estados y las reglas R1–R10 |
+| [`docs/stack.md`](./docs/stack.md) | Tecnologías elegidas y alternativas descartadas |
+| [`docs/architecture.md`](./docs/architecture.md) | Capas, periféricos, red, estado y deuda técnica |
+| [`docs/design.md`](./docs/design.md) | Paleta, tipografía, formatos y tono |
+| [`docs/testing.md`](./docs/testing.md) | Estrategia de pruebas |
+
+## 10. Entrega
+
+En [`entrega/`](./entrega/):
+
+- `informe-evu2.fodt` — fuente del informe en ODF plano. **Es lo único versionado.**
+- `capturas-pendientes.md` — guía de las 16 capturas: dónde tomarlas y qué debe
+  verse en cada una.
+
+Los entregables se generan desde la fuente y quedan fuera del repositorio:
 
 ```bash
-soffice --headless --convert-to docx docs/informe-evu2.fodt --outdir docs
-soffice --headless --convert-to pdf  docs/informe-evu2.fodt --outdir docs
+soffice --headless --convert-to docx entrega/informe-evu2.fodt --outdir entrega
+soffice --headless --convert-to pdf  entrega/informe-evu2.fodt --outdir entrega
 ```

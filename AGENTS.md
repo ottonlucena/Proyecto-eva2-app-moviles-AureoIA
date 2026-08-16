@@ -154,8 +154,22 @@ La app NO puede parecerse al template por defecto.
 6. Si el agente propone una librería nueva, debe justificarla y esperar
    aprobación.
 
-## 10. Qué NO versionar
+## 10. Documentación del proyecto
+
+Antes de tocar código, leer lo que corresponda en [`docs/`](./docs/):
+
+- `docs/brief.md` — el problema y qué queda fuera.
+- `docs/mvp.md` — alcance y definición de "terminado".
+- `docs/domain.md` — la operación y las reglas R1–R10.
+- `docs/stack.md` — tecnologías y alternativas descartadas.
+- `docs/architecture.md` — capas, periféricos, red, estado y deuda técnica.
+- `docs/design.md` — paleta, tipografía, formatos y tono.
+- `docs/testing.md` — estrategia de pruebas.
+
+Si una decisión nueva contradice lo que dice un documento, se actualiza el documento en el
+mismo commit. Documentación desactualizada es peor que no tenerla.
+
+## 11. Qué NO versionar
 
 - `node_modules/`, `coverage/`, `.expo/`
-- `docs-evaluacion/` y cualquier `*.pdf` — enunciado, rúbrica y entregables.
-- `docs/*.docx` — se generan desde `docs/informe-evu2.fodt`.
+- `entrega/*.docx` y `entrega/*.pdf` — se generan desde `entrega/informe-evu2.fodt`.

@@ -46,3 +46,6 @@ docs-evaluacion/
 
 # cobertura de pruebas
 coverage/
+
+# entregables generados desde docs/informe-evu2.fodt
+docs/*.docx

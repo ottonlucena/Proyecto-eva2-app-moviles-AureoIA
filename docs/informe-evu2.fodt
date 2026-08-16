@@ -1,0 +1,860 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<office:document xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0"
+ xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0"
+ xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0"
+ xmlns:table="urn:oasis:names:tc:opendocument:xmlns:table:1.0"
+ xmlns:draw="urn:oasis:names:tc:opendocument:xmlns:drawing:1.0"
+ xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0"
+ xmlns:xlink="http://www.w3.org/1999/xlink"
+ xmlns:svg="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0"
+ office:version="1.3" office:mimetype="application/vnd.oasis.opendocument.text">
+
+<office:font-face-decls>
+  <style:font-face style:name="Arial" svg:font-family="Arial, sans-serif" style:font-family-generic="swiss"/>
+  <style:font-face style:name="Mono" svg:font-family="'Liberation Mono', monospace" style:font-family-generic="modern" style:font-pitch="fixed"/>
+</office:font-face-decls>
+
+<office:automatic-styles>
+  <style:page-layout style:name="pm1">
+    <style:page-layout-properties fo:page-width="21cm" fo:page-height="29.7cm"
+      style:print-orientation="portrait" fo:margin-top="2.5cm" fo:margin-bottom="2cm"
+      fo:margin-left="2.5cm" fo:margin-right="2.5cm">
+      <style:footer-style>
+        <style:header-footer-properties fo:min-height="1cm" fo:margin-top="0.5cm"/>
+      </style:footer-style>
+    </style:page-layout-properties>
+  </style:page-layout>
+  <style:page-layout style:name="pm-portada">
+    <style:page-layout-properties fo:page-width="21cm" fo:page-height="29.7cm"
+      style:print-orientation="portrait" fo:margin-top="3cm" fo:margin-bottom="2cm"
+      fo:margin-left="2.5cm" fo:margin-right="2.5cm"/>
+  </style:page-layout>
+</office:automatic-styles>
+
+<office:styles>
+  <style:default-style style:family="paragraph">
+    <style:paragraph-properties fo:text-align="justify" style:line-height-at-least="115%"
+      style:writing-mode="lr-tb"/>
+    <style:text-properties style:font-name="Arial" fo:font-size="12pt" fo:language="es" fo:country="CL"/>
+  </style:default-style>
+
+  <style:style style:name="Normal" style:family="paragraph">
+    <style:paragraph-properties fo:text-align="justify" fo:line-height="115%"
+      fo:margin-bottom="0.25cm" fo:margin-top="0cm" fo:orphans="2" fo:widows="2"/>
+    <style:text-properties style:font-name="Arial" fo:font-size="12pt"/>
+  </style:style>
+
+  <style:style style:name="Vinieta" style:family="paragraph" style:parent-style-name="Normal">
+    <style:paragraph-properties fo:margin-left="0.8cm" fo:text-indent="-0.4cm" fo:margin-bottom="0.15cm"/>
+  </style:style>
+
+  <style:style style:name="Titulo1" style:family="paragraph">
+    <style:paragraph-properties fo:text-align="left" fo:margin-top="0.7cm" fo:margin-bottom="0.3cm"
+      fo:keep-with-next="always" fo:line-height="115%"/>
+    <style:text-properties style:font-name="Arial" fo:font-size="16pt" fo:font-weight="bold" fo:color="#1F3864"/>
+  </style:style>
+
+  <style:style style:name="Titulo1Inicio" style:family="paragraph" style:parent-style-name="Titulo1"
+    style:master-page-name="Standard">
+    <style:paragraph-properties fo:break-before="page" fo:margin-top="0cm"/>
+  </style:style>
+
+  <style:style style:name="Titulo2" style:family="paragraph">
+    <style:paragraph-properties fo:text-align="left" fo:margin-top="0.5cm" fo:margin-bottom="0.2cm"
+      fo:keep-with-next="always" fo:line-height="115%"/>
+    <style:text-properties style:font-name="Arial" fo:font-size="14pt" fo:font-weight="bold" fo:color="#2E5496"/>
+  </style:style>
+
+  <style:style style:name="Titulo3" style:family="paragraph">
+    <style:paragraph-properties fo:text-align="left" fo:margin-top="0.4cm" fo:margin-bottom="0.15cm"
+      fo:keep-with-next="always" fo:line-height="115%"/>
+    <style:text-properties style:font-name="Arial" fo:font-size="12pt" fo:font-weight="bold"/>
+  </style:style>
+
+  <style:style style:name="PortadaInst" style:family="paragraph">
+    <style:paragraph-properties fo:text-align="center" fo:margin-bottom="0.2cm" fo:line-height="115%"/>
+    <style:text-properties style:font-name="Arial" fo:font-size="14pt" fo:font-weight="bold" fo:letter-spacing="0.05cm"/>
+  </style:style>
+
+  <style:style style:name="PortadaTitulo" style:family="paragraph">
+    <style:paragraph-properties fo:text-align="center" fo:margin-top="1cm" fo:margin-bottom="0.3cm" fo:line-height="115%"/>
+    <style:text-properties style:font-name="Arial" fo:font-size="26pt" fo:font-weight="bold" fo:color="#1F3864"/>
+  </style:style>
+
+  <style:style style:name="PortadaSub" style:family="paragraph">
+    <style:paragraph-properties fo:text-align="center" fo:margin-bottom="0.2cm" fo:line-height="115%"/>
+    <style:text-properties style:font-name="Arial" fo:font-size="14pt" fo:font-style="italic"/>
+  </style:style>
+
+  <style:style style:name="PortadaDato" style:family="paragraph">
+    <style:paragraph-properties fo:text-align="center" fo:margin-bottom="0.1cm" fo:line-height="115%"/>
+    <style:text-properties style:font-name="Arial" fo:font-size="12pt"/>
+  </style:style>
+
+  <style:style style:name="PortadaEtiqueta" style:family="paragraph">
+    <style:paragraph-properties fo:text-align="center" fo:margin-top="0.6cm" fo:margin-bottom="0.1cm" fo:line-height="115%"/>
+    <style:text-properties style:font-name="Arial" fo:font-size="12pt" fo:font-weight="bold"/>
+  </style:style>
+
+  <style:style style:name="Logo" style:family="paragraph">
+    <style:paragraph-properties fo:text-align="center" fo:margin-bottom="0.8cm" fo:padding="0.6cm"
+      fo:border="0.06pt dashed #999999" fo:line-height="115%"/>
+    <style:text-properties style:font-name="Arial" fo:font-size="11pt" fo:font-style="italic" fo:color="#777777"/>
+  </style:style>
+
+  <style:style style:name="Codigo" style:family="paragraph">
+    <style:paragraph-properties fo:text-align="left" fo:margin-top="0.2cm" fo:margin-bottom="0.2cm"
+      fo:padding="0.25cm" fo:background-color="#F2F2F2" fo:border="0.06pt solid #CCCCCC"
+      fo:line-height="105%" fo:keep-together="always"/>
+    <style:text-properties style:font-name="Mono" fo:font-size="9.5pt"/>
+  </style:style>
+
+  <style:style style:name="Captura" style:family="paragraph">
+    <style:paragraph-properties fo:text-align="center" fo:margin-top="0.3cm" fo:margin-bottom="0.1cm"
+      fo:padding-top="2.2cm" fo:padding-bottom="2.2cm" fo:padding-left="0.5cm" fo:padding-right="0.5cm"
+      fo:border="0.06pt dashed #8FAADC" fo:background-color="#F7FAFF" fo:line-height="115%"/>
+    <style:text-properties style:font-name="Arial" fo:font-size="11pt" fo:font-style="italic" fo:color="#2E5496"/>
+  </style:style>
+
+  <style:style style:name="Epigrafe" style:family="paragraph">
+    <style:paragraph-properties fo:text-align="center" fo:margin-bottom="0.5cm" fo:line-height="115%"/>
+    <style:text-properties style:font-name="Arial" fo:font-size="10pt" fo:font-style="italic" fo:color="#555555"/>
+  </style:style>
+
+  <style:style style:name="PiePagina" style:family="paragraph">
+    <style:paragraph-properties fo:text-align="center" fo:line-height="115%"/>
+    <style:text-properties style:font-name="Arial" fo:font-size="10pt" fo:color="#666666"/>
+  </style:style>
+
+  <style:style style:name="Indice" style:family="paragraph" style:parent-style-name="Normal">
+    <style:paragraph-properties fo:margin-bottom="0.1cm" fo:text-align="left"/>
+  </style:style>
+
+  <style:style style:name="IndiceSub" style:family="paragraph" style:parent-style-name="Normal">
+    <style:paragraph-properties fo:margin-bottom="0.1cm" fo:margin-left="0.7cm" fo:text-align="left"/>
+  </style:style>
+
+  <style:style style:name="Negrita" style:family="text">
+    <style:text-properties fo:font-weight="bold"/>
+  </style:style>
+  <style:style style:name="Cursiva" style:family="text">
+    <style:text-properties fo:font-style="italic"/>
+  </style:style>
+  <style:style style:name="CodigoEnLinea" style:family="text">
+    <style:text-properties style:font-name="Mono" fo:font-size="10.5pt" fo:background-color="#F0F0F0"/>
+  </style:style>
+
+  <style:style style:name="TablaCelda" style:family="table-cell">
+    <style:table-cell-properties fo:border="0.5pt solid #AAAAAA" fo:padding="0.15cm"/>
+  </style:style>
+  <style:style style:name="TablaCeldaCab" style:family="table-cell">
+    <style:table-cell-properties fo:border="0.5pt solid #AAAAAA" fo:padding="0.15cm" fo:background-color="#1F3864"/>
+  </style:style>
+  <style:style style:name="TablaTexto" style:family="paragraph">
+    <style:paragraph-properties fo:text-align="left" fo:line-height="115%" fo:margin-bottom="0cm"/>
+    <style:text-properties style:font-name="Arial" fo:font-size="11pt"/>
+  </style:style>
+  <style:style style:name="TablaTextoCab" style:family="paragraph">
+    <style:paragraph-properties fo:text-align="left" fo:line-height="115%" fo:margin-bottom="0cm"/>
+    <style:text-properties style:font-name="Arial" fo:font-size="11pt" fo:font-weight="bold" fo:color="#FFFFFF"/>
+  </style:style>
+
+  <style:style style:name="Tabla" style:family="table">
+    <style:table-properties style:width="16cm" table:align="margins"/>
+  </style:style>
+  <style:style style:name="Col50" style:family="table-column">
+    <style:table-column-properties style:column-width="8cm"/>
+  </style:style>
+  <style:style style:name="Col33" style:family="table-column">
+    <style:table-column-properties style:column-width="5.33cm"/>
+  </style:style>
+  <style:style style:name="ColAncha" style:family="table-column">
+    <style:table-column-properties style:column-width="10cm"/>
+  </style:style>
+  <style:style style:name="ColAngosta" style:family="table-column">
+    <style:table-column-properties style:column-width="3cm"/>
+  </style:style>
+</office:styles>
+
+<office:master-styles>
+  <style:master-page style:name="Portada" style:page-layout-name="pm-portada"/>
+  <style:master-page style:name="Standard" style:page-layout-name="pm1">
+    <style:footer>
+      <text:p text:style-name="PiePagina">
+        <text:page-number text:select-page="current">1</text:page-number>
+      </text:p>
+    </style:footer>
+  </style:master-page>
+</office:master-styles>
+
+<office:body>
+<office:text>
+
+<!-- ===================== PORTADA ===================== -->
+<text:p text:style-name="Logo">[ ESPACIO PARA EL LOGO INSTITUCIONAL — insertar aquí el logo del Instituto Profesional San Sebastián ]</text:p>
+
+<text:p text:style-name="PortadaInst">INSTITUTO PROFESIONAL SAN SEBASTIÁN</text:p>
+<text:p text:style-name="PortadaSub">Desarrollo de Aplicaciones Móviles</text:p>
+
+<text:p text:style-name="PortadaTitulo">Áureo</text:p>
+<text:p text:style-name="PortadaSub">Diario de operaciones de oro con periféricos del dispositivo e integración con servicios web</text:p>
+
+<text:p text:style-name="PortadaDato"/>
+<text:p text:style-name="PortadaDato"/>
+<text:p text:style-name="PortadaInst">Evaluación Sumativa · Unidad 2</text:p>
+
+<text:p text:style-name="PortadaEtiqueta">Profesor</text:p>
+<text:p text:style-name="PortadaDato">Boris Marcelo Belmar Muñoz</text:p>
+
+<text:p text:style-name="PortadaEtiqueta">Integrantes</text:p>
+<text:p text:style-name="PortadaDato">Otton Lucena</text:p>
+<text:p text:style-name="PortadaDato">Valeria Gomez</text:p>
+
+<text:p text:style-name="PortadaEtiqueta">Repositorio del código fuente</text:p>
+<text:p text:style-name="PortadaDato">https://github.com/ottonlucena/Proyecto-eva2-app-moviles-AureoIA</text:p>
+
+<text:p text:style-name="PortadaEtiqueta">Video demostrativo</text:p>
+<text:p text:style-name="PortadaDato">[ PEGAR AQUÍ EL ENLACE AL VIDEO DE YOUTUBE ]</text:p>
+
+<text:p text:style-name="PortadaDato"/>
+<text:p text:style-name="PortadaDato">Santiago de Chile — agosto de 2026</text:p>
+
+<!-- ===================== ÍNDICE ===================== -->
+<text:p text:style-name="Titulo1Inicio">Índice</text:p>
+<text:p text:style-name="Indice">1. Introducción</text:p>
+<text:p text:style-name="Indice">2. Decisiones de diseño</text:p>
+<text:p text:style-name="IndiceSub">2.1. Elección del stack tecnológico</text:p>
+<text:p text:style-name="IndiceSub">2.2. Por qué un diario de operaciones y no una lista de tareas</text:p>
+<text:p text:style-name="IndiceSub">2.3. Arquitectura por capas</text:p>
+<text:p text:style-name="Indice">3. Interacción con los periféricos del dispositivo</text:p>
+<text:p text:style-name="IndiceSub">3.1. Cámara y galería</text:p>
+<text:p text:style-name="IndiceSub">3.2. GPS y coordenadas</text:p>
+<text:p text:style-name="IndiceSub">3.3. Límite de espera</text:p>
+<text:p text:style-name="Indice">4. Gestión de permisos de usuario</text:p>
+<text:p text:style-name="Indice">5. Integración con servicios web y APIs</text:p>
+<text:p text:style-name="IndiceSub">5.1. Cliente HTTP común</text:p>
+<text:p text:style-name="IndiceSub">5.2. Cotización del oro en vivo</text:p>
+<text:p text:style-name="IndiceSub">5.3. Respaldo e importación del diario</text:p>
+<text:p text:style-name="IndiceSub">5.4. Seguridad de la comunicación</text:p>
+<text:p text:style-name="Indice">6. Almacenamiento local y autenticación</text:p>
+<text:p text:style-name="Indice">7. Pruebas automatizadas</text:p>
+<text:p text:style-name="IndiceSub">7.1. Estrategia de prueba</text:p>
+<text:p text:style-name="IndiceSub">7.2. Pruebas de los periféricos</text:p>
+<text:p text:style-name="IndiceSub">7.3. Pruebas de la integración con APIs</text:p>
+<text:p text:style-name="IndiceSub">7.4. Un defecto real detectado por las pruebas</text:p>
+<text:p text:style-name="IndiceSub">7.5. Cobertura obtenida</text:p>
+<text:p text:style-name="Indice">8. El sistema en funcionamiento</text:p>
+<text:p text:style-name="Indice">9. Limitaciones conocidas</text:p>
+<text:p text:style-name="Indice">10. Conclusión</text:p>
+<text:p text:style-name="Indice">Anexo A. Cómo ejecutar el proyecto</text:p>
+<text:p text:style-name="Indice">Anexo B. Correspondencia con la rúbrica</text:p>
+
+<!-- ===================== 1. INTRODUCCIÓN ===================== -->
+<text:p text:style-name="Titulo1">1. Introducción</text:p>
+
+<text:p text:style-name="Normal">Este informe documenta la segunda entrega de <text:span text:style-name="Cursiva">Áureo</text:span>, una aplicación móvil desarrollada para la asignatura Desarrollo de Aplicaciones Móviles. La primera unidad dejó construida la puerta de entrada de la aplicación: la identidad visual, los componentes reutilizables, la navegación y las pantallas de bienvenida y acceso. Esta segunda unidad amplía ese proyecto con lo que exige el resultado de aprendizaje de la unidad: construir aplicaciones móviles que utilicen periféricos del dispositivo —cámara y GPS— e integrarlas con servicios web y APIs externas.</text:p>
+
+<text:p text:style-name="Normal">Áureo es un compañero para aprender a operar oro sin arriesgar dinero real. El usuario registra operaciones simuladas de compra y venta sobre el precio del oro, lleva un diario de cada una con sus notas, y consulta su resultado acumulado. Sobre esa base, esta entrega incorpora cuatro capacidades nuevas: adjuntar a cada operación una fotografía tomada con la cámara del dispositivo, registrar las coordenadas donde se anotó la operación, consultar el precio real del oro en el mercado mediante una API externa, y respaldar el diario completo en un servicio web para poder recuperarlo desde otro dispositivo.</text:p>
+
+<text:p text:style-name="Normal">El documento está organizado siguiendo el recorrido natural del desarrollo: primero las decisiones de diseño que condicionaron todo lo demás, luego cada capacidad nueva con su justificación técnica, después la estrategia de pruebas automatizadas, y finalmente las limitaciones que asumimos de forma consciente. El Anexo B relaciona cada sección con el indicador de la rúbrica que le corresponde.</text:p>
+
+<!-- ===================== 2. DECISIONES DE DISEÑO ===================== -->
+<text:p text:style-name="Titulo1">2. Decisiones de diseño</text:p>
+
+<text:p text:style-name="Titulo2">2.1. Elección del stack tecnológico</text:p>
+
+<text:p text:style-name="Normal">El enunciado de la evaluación menciona Ionic con plugins de Capacitor como tecnología para acceder a la cámara y la geolocalización. Esta entrega está construida con <text:span text:style-name="Negrita">React Native mediante Expo</text:span>, y consideramos necesario explicar la decisión de forma explícita en lugar de dejarla implícita.</text:p>
+
+<text:p text:style-name="Normal">Hay tres razones que sostienen la elección. La primera es de continuidad: el enunciado indica que «este proyecto será ampliado en esta unidad», y el proyecto de la primera unidad ya estaba construido en React Native con Expo y TypeScript. Reescribirlo en Ionic no habría sido ampliarlo sino empezar de cero, contradiciendo la propia instrucción. La segunda es la cátedra: la clase dedicada a esta unidad se dictó íntegramente sobre Expo, instalando <text:span text:style-name="CodigoEnLinea">expo-image-picker</text:span> y <text:span text:style-name="CodigoEnLinea">expo-location</text:span>, con énfasis en usar <text:span text:style-name="CodigoEnLinea">npx expo install</text:span> para que las versiones queden alineadas con el SDK. La tercera es que la competencia evaluada no depende del framework: el resultado de aprendizaje habla de utilizar periféricos del dispositivo y de integrar servicios web, y ambas cosas se demuestran igual de bien con los módulos de Expo que con los plugins de Capacitor.</text:p>
+
+<text:p text:style-name="Normal">Las versiones concretas utilizadas son Expo SDK 54, React Native 0.81.5, React 19.1 y TypeScript 5.9 en modo estricto. La navegación se resuelve con React Navigation sobre un stack nativo.</text:p>
+
+<text:p text:style-name="Titulo2">2.2. Por qué un diario de operaciones y no una lista de tareas</text:p>
+
+<text:p text:style-name="Normal">El enunciado plantea el proyecto como una lista de tareas pendientes. Áureo lo materializa como un diario de operaciones de trading, que es la misma estructura de datos —una colección de registros que se crean, editan, eliminan y cambian de estado— aplicada al dominio que la aplicación venía trabajando desde la primera unidad.</text:p>
+
+<text:p text:style-name="Normal">La equivalencia es directa y además hace que los periféricos y la API dejen de ser un agregado artificial. Una tarea pendiente con una foto y unas coordenadas es un ejercicio; una operación de trading con la captura del gráfico que la motivó y el lugar donde se tomó la decisión es información que un operador principiante realmente querría conservar. Del mismo modo, la integración con una API cobra sentido inmediato: el precio real del oro es el dato externo que la aplicación necesita para que el usuario registre una operación con el valor de mercado del momento.</text:p>
+
+<text:p text:style-name="Normal">La correspondencia con lo que pide el enunciado es la siguiente:</text:p>
+
+<table:table table:name="TablaEquivalencia" table:style-name="Tabla">
+  <table:table-column table:style-name="Col50"/>
+  <table:table-column table:style-name="Col50"/>
+  <table:table-row>
+    <table:table-cell table:style-name="TablaCeldaCab" office:value-type="string"><text:p text:style-name="TablaTextoCab">Requisito del enunciado</text:p></table:table-cell>
+    <table:table-cell table:style-name="TablaCeldaCab" office:value-type="string"><text:p text:style-name="TablaTextoCab">Implementación en Áureo</text:p></table:table-cell>
+  </table:table-row>
+  <table:table-row>
+    <table:table-cell table:style-name="TablaCelda" office:value-type="string"><text:p text:style-name="TablaTexto">Lista de tareas con alta, edición y baja</text:p></table:table-cell>
+    <table:table-cell table:style-name="TablaCelda" office:value-type="string"><text:p text:style-name="TablaTexto">Diario de operaciones con el mismo ciclo completo</text:p></table:table-cell>
+  </table:table-row>
+  <table:table-row>
+    <table:table-cell table:style-name="TablaCelda" office:value-type="string"><text:p text:style-name="TablaTexto">Tarea completada o pendiente</text:p></table:table-cell>
+    <table:table-cell table:style-name="TablaCelda" office:value-type="string"><text:p text:style-name="TablaTexto">Operación cerrada o abierta</text:p></table:table-cell>
+  </table:table-row>
+  <table:table-row>
+    <table:table-cell table:style-name="TablaCelda" office:value-type="string"><text:p text:style-name="TablaTexto">Capturar imágenes y adjuntarlas a las tareas</text:p></table:table-cell>
+    <table:table-cell table:style-name="TablaCelda" office:value-type="string"><text:p text:style-name="TablaTexto">Fotografía del gráfico adjunta a la operación</text:p></table:table-cell>
+  </table:table-row>
+  <table:table-row>
+    <table:table-cell table:style-name="TablaCelda" office:value-type="string"><text:p text:style-name="TablaTexto">Registrar la ubicación donde se crea cada tarea</text:p></table:table-cell>
+    <table:table-cell table:style-name="TablaCelda" office:value-type="string"><text:p text:style-name="TablaTexto">Coordenadas del dispositivo al registrar la operación</text:p></table:table-cell>
+  </table:table-row>
+  <table:table-row>
+    <table:table-cell table:style-name="TablaCelda" office:value-type="string"><text:p text:style-name="TablaTexto">Obtener y gestionar datos externos</text:p></table:table-cell>
+    <table:table-cell table:style-name="TablaCelda" office:value-type="string"><text:p text:style-name="TablaTexto">Cotización real de XAU/USD desde una API pública</text:p></table:table-cell>
+  </table:table-row>
+  <table:table-row>
+    <table:table-cell table:style-name="TablaCelda" office:value-type="string"><text:p text:style-name="TablaTexto">Sincronizar con un servicio web para almacenar en remoto</text:p></table:table-cell>
+    <table:table-cell table:style-name="TablaCelda" office:value-type="string"><text:p text:style-name="TablaTexto">Respaldo del diario completo en un servicio REST</text:p></table:table-cell>
+  </table:table-row>
+  <table:table-row>
+    <table:table-cell table:style-name="TablaCelda" office:value-type="string"><text:p text:style-name="TablaTexto">Importar registros desde una API externa</text:p></table:table-cell>
+    <table:table-cell table:style-name="TablaCelda" office:value-type="string"><text:p text:style-name="TablaTexto">Importación con fusión contra el diario local</text:p></table:table-cell>
+  </table:table-row>
+  <table:table-row>
+    <table:table-cell table:style-name="TablaCelda" office:value-type="string"><text:p text:style-name="TablaTexto">Almacenamiento local que funcione sin conexión</text:p></table:table-cell>
+    <table:table-cell table:style-name="TablaCelda" office:value-type="string"><text:p text:style-name="TablaTexto">Persistencia en AsyncStorage como fuente principal</text:p></table:table-cell>
+  </table:table-row>
+</table:table>
+
+<text:p text:style-name="Titulo2">2.3. Arquitectura por capas</text:p>
+
+<text:p text:style-name="Normal">El código está organizado en capas con una dependencia estrictamente descendente: las pantallas conocen los servicios, los servicios conocen el dominio, y el dominio no conoce a nadie. Esta separación no es decorativa; es lo que permitió que la mayor parte de la lógica se pudiera probar sin necesidad de un dispositivo, y esa consecuencia se detalla en la sección 7.</text:p>
+
+<text:p text:style-name="Codigo">src/
+├── types/          Modelo de datos. Sin dependencias.
+├── domain/         Reglas del diario y validación. Funciones puras.
+├── storage/        Persistencia local en el dispositivo.
+├── api/            Comunicación con los servicios web externos.
+├── services/       Acceso a los periféricos del dispositivo.
+├── context/        Estado compartido que coordina las capas anteriores.
+├── hooks/          Lógica de pantalla reutilizable.
+├── components/     Componentes visuales reutilizables.
+├── screens/        Pantallas de la aplicación.
+├── navigation/     Configuración del stack de navegación.
+├── theme/          Colores y escala de espaciados. Única fuente de estilo.
+└── utils/          Formateo y avisos.</text:p>
+
+<text:p text:style-name="Normal">Dos decisiones transversales merecen mención. La primera es que ninguna pantalla llama directamente a <text:span text:style-name="CodigoEnLinea">fetch</text:span> ni a un módulo de Expo: todo pasa por la capa correspondiente, que devuelve un resultado ya interpretado. La segunda es que las decisiones —¿el usuario canceló?, ¿estas coordenadas son creíbles?, ¿esta respuesta del servidor es confiable?— viven en funciones puras separadas de la ejecución, porque son el lugar donde de verdad puede haber un error de criterio.</text:p>
+
+<!-- ===================== 3. PERIFÉRICOS ===================== -->
+<text:p text:style-name="Titulo1">3. Interacción con los periféricos del dispositivo</text:p>
+
+<text:p text:style-name="Normal">Los dos periféricos incorporados son la cámara y el GPS. Ambos se instalaron con <text:span text:style-name="CodigoEnLinea">npx expo install</text:span> en lugar de <text:span text:style-name="CodigoEnLinea">npm install</text:span>, de modo que Expo resuelva la versión compatible con el SDK del proyecto en vez de traer la última publicada, que podría no serlo. Las versiones resultantes son <text:span text:style-name="CodigoEnLinea">expo-image-picker</text:span> 17.0.11 y <text:span text:style-name="CodigoEnLinea">expo-location</text:span> 19.0.8.</text:p>
+
+<text:p text:style-name="Normal">Ambos periféricos comparten un mismo tipo de resultado, definido como unión discriminada con cuatro desenlaces posibles:</text:p>
+
+<text:p text:style-name="Codigo">export type ResultadoPeriferico&lt;T&gt; =
+  | { estado: 'exito'; datos: T }
+  | { estado: 'cancelado' }
+  | { estado: 'sin-permiso'; puedeReintentar: boolean; mensaje: string }
+  | { estado: 'error'; mensaje: string };</text:p>
+
+<text:p text:style-name="Normal">La razón de modelarlo así, en lugar de devolver un valor que puede ser nulo, es que los cuatro desenlaces exigen respuestas distintas de la interfaz. Una cancelación no se comenta, porque el usuario cerró la cámara a propósito y confirmárselo con un cartel es ruido. Un permiso negado de forma definitiva ofrece abrir los ajustes del sistema. Un error se explica. Colapsar los cuatro casos en un valor nulo obligaría a la pantalla a adivinar cuál ocurrió.</text:p>
+
+<text:p text:style-name="Titulo2">3.1. Cámara y galería</text:p>
+
+<text:p text:style-name="Normal">La captura de imágenes se resuelve en <text:span text:style-name="CodigoEnLinea">src/services/camaraService.ts</text:span>. El flujo pide el permiso, lanza el periférico con un límite de espera y delega la interpretación del resultado en una función pura.</text:p>
+
+<text:p text:style-name="Codigo">export const CALIDAD_FOTO = 0.6;
+
+export async function tomarFoto(): Promise&lt;ResultadoPeriferico&lt;string&gt;&gt; {
+  try {
+    const permiso = await ImagePicker.requestCameraPermissionsAsync();
+    const negado = interpretarPermiso(
+      permiso,
+      'Necesitamos la cámara para adjuntar una foto a la operación.',
+    );
+    if (negado !== undefined) return negado;
+
+    const resultado = await conTimeout(
+      ImagePicker.launchCameraAsync({
+        quality: CALIDAD_FOTO,
+        allowsEditing: true,
+        aspect: ASPECTO_RECORTE,
+      }),
+    );
+
+    return interpretarSeleccion(resultado);
+  } catch (error) {
+    return comoError(error, 'La cámara');
+  }
+}</text:p>
+
+<text:p text:style-name="Normal">La calidad se fija en 0,6 porque las imágenes se guardan en el dispositivo y además viajan dentro del respaldo remoto. Una fotografía sin comprimir infla ambas cosas sin aportar detalle útil para lo que se está capturando, que es la captura de un gráfico.</text:p>
+
+<text:p text:style-name="Normal">Junto a la cámara se ofrece la galería como vía alternativa. La decisión responde a dos situaciones concretas: un emulador sin cámara configurada, y un usuario que prefiere no conceder el permiso de cámara pero sí adjuntar una captura que ya tiene guardada. Si la única vía fuera la cámara, ambos casos quedarían sin salida.</text:p>
+
+<text:p text:style-name="Titulo2">3.2. GPS y coordenadas</text:p>
+
+<text:p text:style-name="Normal">La obtención de coordenadas vive en <text:span text:style-name="CodigoEnLinea">src/services/ubicacionService.ts</text:span> y sigue la misma estructura. La precisión solicitada es <text:span text:style-name="CodigoEnLinea">Accuracy.Balanced</text:span>, del orden de la manzana, que alcanza de sobra para dejar constancia de dónde se registró la operación y consume bastante menos batería que la precisión máxima, además de fijar posición mucho más rápido bajo techo.</text:p>
+
+<text:p text:style-name="Normal">Las coordenadas recibidas no se aceptan sin verificar. Un GPS que todavía no ha fijado posición puede devolver valores imposibles, y unas coordenadas basura quedarían guardadas en la operación como si fueran buenas:</text:p>
+
+<text:p text:style-name="Codigo">export function interpretarPosicion(
+  posicion: LocationObject,
+): ResultadoPeriferico&lt;Ubicacion&gt; {
+  const { latitude, longitude } = posicion.coords;
+
+  const sonValidas =
+    Number.isFinite(latitude) &amp;&amp; Number.isFinite(longitude) &amp;&amp;
+    latitude &gt;= -90 &amp;&amp; latitude &lt;= 90 &amp;&amp;
+    longitude &gt;= -180 &amp;&amp; longitude &lt;= 180;
+
+  if (!sonValidas) {
+    return { estado: 'error', mensaje: 'Las coordenadas recibidas no son válidas.' };
+  }
+
+  return { estado: 'exito', datos: { latitud: latitude, longitud: longitude } };
+}</text:p>
+
+<text:p text:style-name="Normal">La captura la dispara el usuario con un botón y no ocurre automáticamente al abrir el formulario. Encender el GPS sin que nadie lo haya pedido gasta batería y toma una posición que quizá termine descartada si la operación no llega a guardarse.</text:p>
+
+<text:p text:style-name="Titulo2">3.3. Límite de espera</text:p>
+
+<text:p text:style-name="Normal">Toda llamada a un periférico está envuelta en un límite de espera de quince segundos. El motivo es que un periférico que falla y un periférico que no responde son problemas distintos, y el segundo es el peligroso: un GPS sin señal —bajo techo, en un sótano, en un ascensor— no lanza ningún error, simplemente nunca resuelve la promesa. Sin un reloj que la corte, la pantalla queda esperando indefinidamente y el usuario no tiene forma de saber si debe seguir esperando o si algo se rompió.</text:p>
+
+<text:p text:style-name="Codigo">export async function conTimeout&lt;T&gt;(
+  promesa: Promise&lt;T&gt;,
+  ms: number = TIMEOUT_PERIFERICO_MS,
+): Promise&lt;T&gt; {
+  let temporizador: ReturnType&lt;typeof setTimeout&gt; | undefined;
+
+  const reloj = new Promise&lt;never&gt;((_, rechazar) => {
+    temporizador = setTimeout(() => rechazar(new TiempoAgotadoError()), ms);
+  });
+
+  try {
+    return await Promise.race([promesa, reloj]);
+  } finally {
+    if (temporizador !== undefined) clearTimeout(temporizador);
+  }
+}</text:p>
+
+<text:p text:style-name="Normal">El temporizador se limpia siempre, gane quien gane la carrera. Dejarlo vivo mantendría el proceso despierto sin necesidad.</text:p>
+
+<!-- ===================== 4. PERMISOS ===================== -->
+<text:p text:style-name="Titulo1">4. Gestión de permisos de usuario</text:p>
+
+<text:p text:style-name="Normal">Los permisos se solicitan en tiempo de ejecución, en el momento en que el usuario intenta usar la funcionalidad correspondiente, y nunca al iniciar la aplicación. Pedir permisos al arranque, antes de que la persona entienda para qué sirven, es la forma más segura de que los niegue.</text:p>
+
+<text:p text:style-name="Normal">Los permisos declarados son estrictamente los necesarios. En Android: <text:span text:style-name="CodigoEnLinea">CAMERA</text:span>, <text:span text:style-name="CodigoEnLinea">ACCESS_COARSE_LOCATION</text:span> y <text:span text:style-name="CodigoEnLinea">ACCESS_FINE_LOCATION</text:span>. Deliberadamente <text:span text:style-name="Negrita">no</text:span> se declara <text:span text:style-name="CodigoEnLinea">ACCESS_BACKGROUND_LOCATION</text:span>: la aplicación registra dónde estaba el usuario en el instante en que anotó una operación, no lo sigue mientras no la está usando. Pedir el permiso mínimo necesario es lo correcto desde el punto de vista de la privacidad y además evita la revisión adicional que las tiendas de aplicaciones exigen para el rastreo en segundo plano.</text:p>
+
+<text:p text:style-name="Normal">Cada permiso lleva un mensaje que explica para qué se usa, declarado en <text:span text:style-name="CodigoEnLinea">app.json</text:span> tanto para iOS como para Android:</text:p>
+
+<text:p text:style-name="Codigo">"infoPlist": {
+  "NSCameraUsageDescription": "Áureo usa la cámara para que adjuntes una
+    foto del gráfico a cada operación de tu diario.",
+  "NSLocationWhenInUseUsageDescription": "Áureo registra dónde anotaste
+    cada operación. Solo se consulta mientras usás la app."
+}</text:p>
+
+<text:p text:style-name="Normal">El tratamiento de la negativa distingue dos situaciones, y esa distinción es la parte menos evidente de la gestión de permisos. Cuando el sistema todavía puede volver a mostrar el diálogo, basta con explicar para qué se necesita el permiso y dejar que el usuario lo intente de nuevo. Pero cuando el sistema ya no volverá a preguntar, la aplicación no tiene ninguna forma de solicitarlo otra vez: la única salida es que la persona lo habilite a mano en los ajustes. Si no se le ofrece ese camino, queda bloqueada sin entender por qué el botón no hace nada.</text:p>
+
+<text:p text:style-name="Codigo">export function avisarFalloPeriferico&lt;T&gt;(
+  resultado: ResultadoPeriferico&lt;T&gt;,
+  titulo: string,
+): void {
+  if (resultado.estado === 'exito' || resultado.estado === 'cancelado') return;
+
+  if (resultado.estado === 'sin-permiso' &amp;&amp; !resultado.puedeReintentar) {
+    Alert.alert(titulo, resultado.mensaje, [
+      { text: 'Ahora no', style: 'cancel' },
+      { text: 'Abrir ajustes', onPress: () =&gt; void Linking.openSettings() },
+    ]);
+    return;
+  }
+
+  Alert.alert(titulo, resultado.mensaje);
+}</text:p>
+
+<text:p text:style-name="Normal">Por último, la aplicación sigue siendo utilizable sin ningún permiso concedido. La fotografía y las coordenadas son campos opcionales de la operación: quien niegue ambos permisos puede registrar, editar, cerrar y respaldar su diario con normalidad. Ninguna funcionalidad esencial queda detrás de un periférico.</text:p>
+
+<!-- ===================== 5. APIS ===================== -->
+<text:p text:style-name="Titulo1">5. Integración con servicios web y APIs</text:p>
+
+<text:p text:style-name="Normal">La aplicación se comunica con dos servicios externos, que cubren las dos direcciones que pide el enunciado: obtener datos externos y almacenar datos de forma remota.</text:p>
+
+<text:p text:style-name="Titulo2">5.1. Cliente HTTP común</text:p>
+
+<text:p text:style-name="Normal">Ninguna pantalla ni ningún servicio llama a <text:span text:style-name="CodigoEnLinea">fetch</text:span> directamente. Todas las peticiones pasan por <text:span text:style-name="CodigoEnLinea">src/api/cliente.ts</text:span>, que concentra las tres cosas que no pueden faltar al hablar con una API desde un móvil: un límite de espera, el manejo explícito de cada modo de falla y la validación de lo que responde el servidor.</text:p>
+
+<text:p text:style-name="Normal">Los errores se devuelven como valor en lugar de lanzarse como excepción. En un dispositivo móvil la red falla constantemente, y quedarse sin señal es un caso esperado del flujo normal de uso, no una situación excepcional:</text:p>
+
+<text:p text:style-name="Codigo">export type Resultado&lt;T&gt; =
+  | { ok: true; datos: T }
+  | { ok: false; error: ErrorApi };
+
+export interface ErrorApi {
+  tipo: 'red' | 'timeout' | 'http' | 'formato';
+  mensaje: string;
+  codigoHttp?: number;
+}</text:p>
+
+<text:p text:style-name="Normal">Los cuatro tipos de error se distinguen porque llevan a acciones diferentes. Una falla de red se soluciona recuperando la señal; un timeout puede resolverse reintentando; un error HTTP puede significar que el recurso ya no existe; y un error de formato indica que el servidor cambió su contrato. Conservar el código de estado resulta indispensable: de detectar un 404 depende que un respaldo borrado se vuelva a crear en lugar de fallar para siempre.</text:p>
+
+<text:p text:style-name="Titulo2">5.2. Cotización del oro en vivo</text:p>
+
+<text:p text:style-name="Normal">La primera integración consulta el precio real de la onza de oro en <text:span text:style-name="CodigoEnLinea">api.gold-api.com</text:span>. El precio se muestra en la pantalla del diario y en el formulario, donde un botón permite volcarlo directamente al campo de precio de entrada para registrar la operación al valor de mercado del momento.</text:p>
+
+<text:p text:style-name="Normal">La respuesta se valida antes de dejarla entrar a la aplicación. Los datos externos son la frontera menos confiable del sistema, porque una API puede cambiar su contrato sin previo aviso. Un precio ausente, cero o negativo se rechaza, ya que de otro modo llegaría hasta el cálculo de resultados y lo falsearía en silencio:</text:p>
+
+<text:p text:style-name="Codigo">export function interpretarCotizacion(datos: unknown): Resultado&lt;Cotizacion&gt; {
+  if (typeof datos !== 'object' || datos === null) {
+    return fallo({ tipo: 'formato', mensaje: 'La cotización recibida no es válida.' });
+  }
+
+  const posible = datos as Record&lt;string, unknown&gt;;
+
+  if (typeof posible.price !== 'number' || !Number.isFinite(posible.price)
+      || posible.price &lt;= 0) {
+    return fallo({ tipo: 'formato',
+      mensaje: 'La cotización recibida no trae un precio válido.' });
+  }
+
+  const actualizado = typeof posible.updatedAt === 'string'
+    ? posible.updatedAt : new Date().toISOString();
+
+  return exito({ precio: posible.price, actualizado });
+}</text:p>
+
+<text:p text:style-name="Normal">Cuando la consulta falla, la interfaz explica qué ocurrió y ofrece reintentar, en lugar de dejar el espacio vacío. El usuario debe poder distinguir entre «no hay señal» y «la aplicación está rota». Si ya había un precio cargado, se conserva mientras se reintenta: mostrar un valor de hace unos minutos es más útil que no mostrar nada.</text:p>
+
+<text:p text:style-name="Titulo2">5.3. Respaldo e importación del diario</text:p>
+
+<text:p text:style-name="Normal">La segunda integración cubre el almacenamiento remoto. El diario completo se sube a <text:span text:style-name="CodigoEnLinea">api.restful-api.dev</text:span>, un servicio REST público que acepta las operaciones de creación, actualización y consulta sin necesidad de credenciales. La pantalla «Respaldo en la nube» ofrece las dos direcciones de forma explícita.</text:p>
+
+<text:p text:style-name="Normal">El diario viaja completo dentro de un único objeto remoto, y no como un objeto por operación. De este modo el respaldo se sube y se baja en una sola petición, sin riesgo de quedar a medias si la conexión se corta en mitad de un lote de envíos. La primera vez se crea con POST; las siguientes se reemplaza con PUT sobre el identificador que devolvió el servidor.</text:p>
+
+<text:p text:style-name="Normal">La operación de importar es la que concentra la lógica interesante. No reemplaza el diario local con el remoto, sino que los fusiona:</text:p>
+
+<text:p text:style-name="Codigo">export function fusionarDiarios(
+  locales: readonly Operacion[],
+  remotas: readonly Operacion[],
+): Operacion[] {
+  const porId = new Map&lt;string, Operacion&gt;();
+
+  // Primero las remotas, para que las locales las sobrescriban al pasar después.
+  for (const operacion of remotas) porId.set(operacion.id, operacion);
+  for (const operacion of locales) porId.set(operacion.id, operacion);
+
+  return [...porId.values()].sort((a, b) =&gt;
+    b.fechaCreacion.localeCompare(a.fechaCreacion),
+  );
+}</text:p>
+
+<text:p text:style-name="Normal">Reemplazar habría borrado todas las operaciones registradas en el dispositivo después del último respaldo. Ante un mismo identificador presente en ambos lados gana la versión local, porque el dispositivo es la fuente de verdad de lo que el usuario acaba de hacer, mientras que el respaldo remoto puede ser de hace días; si ganara el remoto, restaurar pisaría ediciones recientes.</text:p>
+
+<text:p text:style-name="Normal">La desaparición del respaldo en el servidor se maneja de forma explícita. Al subir, un 404 sobre el identificador guardado significa que el objeto fue borrado, así que se crea uno nuevo en lugar de dejar al usuario sin posibilidad de respaldar. Al bajar, un 404 hace que la aplicación olvide el identificador muerto en vez de reintentar eternamente contra algo que ya no existe.</text:p>
+
+<text:p text:style-name="Titulo2">5.4. Seguridad de la comunicación</text:p>
+
+<text:p text:style-name="Normal">Cuatro medidas concretas protegen la comunicación con los servicios externos.</text:p>
+
+<text:p text:style-name="Vinieta">• <text:span text:style-name="Negrita">Solo HTTPS.</text:span> El cliente rechaza cualquier URL que no comience con <text:span text:style-name="CodigoEnLinea">https://</text:span> antes siquiera de intentar la conexión, de modo que los datos nunca llegan a viajar en claro. Android bloquea el tráfico sin cifrar por defecto desde la versión 9, pero la comprobación explícita evita que una URL mal escrita pase inadvertida.</text:p>
+
+<text:p text:style-name="Vinieta">• <text:span text:style-name="Negrita">Ausencia de credenciales.</text:span> Ambos servicios se eligieron deliberadamente entre los que no requieren clave de acceso. El repositorio del proyecto es público, y una API con credenciales habría exigido guardar un secreto que, tarde o temprano, termina en el historial de commits. No hay nada que filtrar porque no hay nada que ocultar. Una prueba automatizada verifica que ninguna petición lleve cabeceras de autorización ni claves en la URL.</text:p>
+
+<text:p text:style-name="Vinieta">• <text:span text:style-name="Negrita">Validación de todo dato entrante.</text:span> Nada de lo que devuelve un servidor se incorpora al diario sin verificar su forma. En el caso del respaldo, cada operación se valida individualmente y las que no cumplen se descartan, conservando las válidas.</text:p>
+
+<text:p text:style-name="Vinieta">• <text:span text:style-name="Negrita">Límite de espera.</text:span> Diez segundos, implementados con <text:span text:style-name="CodigoEnLinea">AbortController</text:span>, que aborta la petición de verdad en lugar de limitarse a ignorar la respuesta tardía.</text:p>
+
+<!-- ===================== 6. ALMACENAMIENTO ===================== -->
+<text:p text:style-name="Titulo1">6. Almacenamiento local y autenticación</text:p>
+
+<text:p text:style-name="Normal">El diario se guarda en el dispositivo con AsyncStorage y esa es su fuente principal. La aplicación funciona completa sin conexión a internet: se pueden registrar, editar, cerrar y eliminar operaciones sin red, y el respaldo remoto es un extra para recuperar el diario desde otro dispositivo, nunca un requisito para usarlo.</text:p>
+
+<text:p text:style-name="Normal">La lectura de lo almacenado es defensiva. Lo que hay guardado en un dispositivo pudo escribirlo una versión anterior de la aplicación o pudo dañarse, así que nada se da por sentado. La regla que seguimos es que un registro corrupto nunca deje al usuario sin su diario: las entradas inválidas se descartan y las válidas se conservan.</text:p>
+
+<text:p text:style-name="Codigo">export function parsearOperaciones(crudo: string | null): Operacion[] {
+  if (crudo === null || crudo.length === 0) return [];
+
+  try {
+    const parseado: unknown = JSON.parse(crudo);
+    return filtrarOperacionesValidas(parseado);
+  } catch {
+    return [];
+  }
+}</text:p>
+
+<text:p text:style-name="Normal">La misma función de validación sirve a las dos fronteras que no son de confianza —lo leído del dispositivo y lo bajado del servidor— y por eso vive en la capa de dominio, no en la de almacenamiento.</text:p>
+
+<text:p text:style-name="Normal">Respecto a la autenticación, la aplicación conserva la pantalla de acceso construida en la primera unidad, con validación de campos y respuesta visual. Se trata de una autenticación local, sin verificación contra un servidor. Es una limitación consciente que se detalla en la sección 9.</text:p>
+
+<!-- ===================== 7. PRUEBAS ===================== -->
+<text:p text:style-name="Titulo1">7. Pruebas automatizadas</text:p>
+
+<text:p text:style-name="Titulo2">7.1. Estrategia de prueba</text:p>
+
+<text:p text:style-name="Normal">La suite consta de <text:span text:style-name="Negrita">216 pruebas distribuidas en 14 archivos</text:span>, ejecutables con <text:span text:style-name="CodigoEnLinea">npm test</text:span> y con un tiempo total de ejecución cercano a los tres segundos. El entorno es Jest con el preset <text:span text:style-name="CodigoEnLinea">jest-expo</text:span>, complementado con React Native Testing Library para las pruebas que necesitan montar componentes.</text:p>
+
+<text:p text:style-name="Normal">La estrategia se apoya en una idea que condicionó el diseño del código desde el principio: <text:span text:style-name="Negrita">separar la decisión de la ejecución</text:span>. Los módulos que hablan con la cámara, el GPS o la red se limitan a orquestar; toda la lógica de criterio vive en funciones puras que no cargan nada nativo. El módulo <text:span text:style-name="CodigoEnLinea">src/services/interpretes.ts</text:span> es el ejemplo más claro: importa los tipos de Expo mediante <text:span text:style-name="CodigoEnLinea">import type</text:span>, que TypeScript elimina al compilar, de modo que el archivo puede probarse en cualquier entorno sin simular ningún periférico.</text:p>
+
+<text:p text:style-name="Normal">Para el resto se sustituyen los módulos nativos y <text:span text:style-name="CodigoEnLinea">fetch</text:span>. La sustitución no es un atajo: es la única forma de provocar de manera repetible los escenarios que más importan y que a mano serían prácticamente irreproducibles.</text:p>
+
+<text:p text:style-name="Titulo2">7.2. Pruebas de los periféricos</text:p>
+
+<text:p text:style-name="Normal">Los escenarios cubiertos para cámara y GPS incluyen el camino feliz, la cancelación del usuario, el permiso negado, el permiso negado de forma definitiva, una respuesta sin imágenes, coordenadas fuera de rango, coordenadas no numéricas, los valores de borde de latitud y longitud, y el fallo del periférico.</text:p>
+
+<text:p text:style-name="Normal">El caso más valioso es el del periférico que nunca responde. Reproducirlo en un dispositivo real exigiría bajar a un sótano con la esperanza de que el GPS no fije posición; con el módulo sustituido se provoca de forma determinista:</text:p>
+
+<text:p text:style-name="Codigo">it('se rinde con un aviso útil si el GPS no consigue señal', async () =&gt; {
+  jest.useFakeTimers();
+  pedirPermiso.mockResolvedValue(CONCEDIDO);
+  // Un GPS sin señal no falla: se queda pensando indefinidamente.
+  posicionActual.mockReturnValue(new Promise(() =&gt; {}));
+
+  const promesa = obtenerUbicacion();
+  await jest.advanceTimersByTimeAsync(16_000);
+  const resultado = await promesa;
+
+  expect(resultado.estado).toBe('error');
+  expect(resultado.estado === 'error' &amp;&amp; resultado.mensaje).toContain('aire libre');
+
+  jest.useRealTimers();
+});</text:p>
+
+<text:p text:style-name="Normal">Otra prueba verifica algo que no es visible en la interfaz pero sí es esencial: que ante un permiso negado el periférico <text:span text:style-name="Negrita">no llegue a invocarse</text:span>, comprobando que la función correspondiente no fue llamada.</text:p>
+
+<text:p text:style-name="Titulo2">7.3. Pruebas de la integración con APIs</text:p>
+
+<text:p text:style-name="Normal">Con <text:span text:style-name="CodigoEnLinea">fetch</text:span> sustituido se cubren el rechazo de HTTP plano, los códigos 400, 404, 429, 500 y 503, la caída de red, una respuesta que no es JSON válido y el aborto por agotamiento del tiempo de espera. Se verifica además que el cuerpo se serialice correctamente, que la cabecera de tipo de contenido solo se envíe cuando hay cuerpo, y que el código de estado se conserve para que quien llama pueda reaccionar.</text:p>
+
+<text:p text:style-name="Normal">Sobre la seguridad, una prueba comprueba explícitamente que no viaje ninguna credencial:</text:p>
+
+<text:p text:style-name="Codigo">it('no envía ninguna credencial: no hay secretos que filtrar', async () =&gt; {
+  fetchSimulado.mockResolvedValue(respuestaOk({ price: 4377.6 }));
+
+  await obtenerCotizacion();
+
+  const [url, opciones] = fetchSimulado.mock.calls[0];
+  expect(url).not.toMatch(/api[_-]?key|token|secret/i);
+  expect(JSON.stringify(opciones.headers))
+    .not.toMatch(/authorization|api[_-]?key/i);
+});</text:p>
+
+<text:p text:style-name="Normal">En cuanto a la manipulación de datos externos, se comprueba que un respaldo con registros manipulados no contamine el diario, que la fusión no genere duplicados y que la versión local prevalezca sobre la remota.</text:p>
+
+<text:p text:style-name="Titulo2">7.4. Un defecto real detectado por las pruebas</text:p>
+
+<text:p text:style-name="Normal">Las pruebas del estado compartido no confirmaron un comportamiento correcto: encontraron un error que ya estaba en el código y que no se manifestaba en la revisión visual ni en la verificación de tipos.</text:p>
+
+<text:p text:style-name="Normal">La primera versión de la función que aplica cambios al diario leía la lista desde el actualizador de estado de React para luego persistirla:</text:p>
+
+<text:p text:style-name="Codigo">// Versión defectuosa
+let resultado: Operacion[] = [];
+
+setOperaciones((previas) =&gt; {
+  resultado = transformar(previas);
+  return resultado;
+});
+
+await guardarOperaciones(resultado);   // ← guardaba el valor anterior</text:p>
+
+<text:p text:style-name="Normal">React no ejecuta ese actualizador en el momento de llamarlo, sino durante la fase de renderizado posterior. En consecuencia, <text:span text:style-name="CodigoEnLinea">guardarOperaciones</text:span> recibía el valor previo a la modificación. El síntoma para el usuario habría sido grave y desconcertante: registrar la primera operación, verla aparecer en pantalla, cerrar la aplicación y encontrarse con el diario vacío al volver a abrirla.</text:p>
+
+<text:p text:style-name="Normal">La prueba lo detectó de inmediato, porque comprobaba no solo el estado en memoria sino también lo efectivamente escrito en el dispositivo:</text:p>
+
+<text:p text:style-name="Codigo">expect(received).toHaveLength(expected)
+
+Expected length: 1
+Received length: 0
+Received array:  []</text:p>
+
+<text:p text:style-name="Normal">La corrección consistió en mantener el diario también en una referencia que se actualiza de forma inmediata, y usarla como origen tanto del guardado como del respaldo. Consideramos que este hallazgo justifica por sí solo el esfuerzo invertido en la suite: es exactamente el tipo de defecto que no aparece revisando el código ni ejecutando el verificador de tipos, y que se manifiesta ante el usuario como una pérdida de datos.</text:p>
+
+<text:p text:style-name="Titulo2">7.5. Cobertura obtenida</text:p>
+
+<table:table table:name="TablaCobertura" table:style-name="Tabla">
+  <table:table-column table:style-name="ColAncha"/>
+  <table:table-column table:style-name="ColAngosta"/>
+  <table:table-row>
+    <table:table-cell table:style-name="TablaCeldaCab" office:value-type="string"><text:p text:style-name="TablaTextoCab">Capa</text:p></table:table-cell>
+    <table:table-cell table:style-name="TablaCeldaCab" office:value-type="string"><text:p text:style-name="TablaTextoCab">Cobertura</text:p></table:table-cell>
+  </table:table-row>
+  <table:table-row>
+    <table:table-cell table:style-name="TablaCelda" office:value-type="string"><text:p text:style-name="TablaTexto">utils — formateo y avisos</text:p></table:table-cell>
+    <table:table-cell table:style-name="TablaCelda" office:value-type="string"><text:p text:style-name="TablaTexto">100 %</text:p></table:table-cell>
+  </table:table-row>
+  <table:table-row>
+    <table:table-cell table:style-name="TablaCelda" office:value-type="string"><text:p text:style-name="TablaTexto">domain — reglas del diario y validación</text:p></table:table-cell>
+    <table:table-cell table:style-name="TablaCelda" office:value-type="string"><text:p text:style-name="TablaTexto">98 %</text:p></table:table-cell>
+  </table:table-row>
+  <table:table-row>
+    <table:table-cell table:style-name="TablaCelda" office:value-type="string"><text:p text:style-name="TablaTexto">api — comunicación con servicios web</text:p></table:table-cell>
+    <table:table-cell table:style-name="TablaCelda" office:value-type="string"><text:p text:style-name="TablaTexto">98 %</text:p></table:table-cell>
+  </table:table-row>
+  <table:table-row>
+    <table:table-cell table:style-name="TablaCelda" office:value-type="string"><text:p text:style-name="TablaTexto">services — periféricos del dispositivo</text:p></table:table-cell>
+    <table:table-cell table:style-name="TablaCelda" office:value-type="string"><text:p text:style-name="TablaTexto">98 %</text:p></table:table-cell>
+  </table:table-row>
+  <table:table-row>
+    <table:table-cell table:style-name="TablaCelda" office:value-type="string"><text:p text:style-name="TablaTexto">context — estado compartido</text:p></table:table-cell>
+    <table:table-cell table:style-name="TablaCelda" office:value-type="string"><text:p text:style-name="TablaTexto">97 %</text:p></table:table-cell>
+  </table:table-row>
+  <table:table-row>
+    <table:table-cell table:style-name="TablaCelda" office:value-type="string"><text:p text:style-name="TablaTexto">storage — persistencia local</text:p></table:table-cell>
+    <table:table-cell table:style-name="TablaCelda" office:value-type="string"><text:p text:style-name="TablaTexto">96 %</text:p></table:table-cell>
+  </table:table-row>
+  <table:table-row>
+    <table:table-cell table:style-name="TablaCelda" office:value-type="string"><text:p text:style-name="TablaTexto">hooks — lógica de pantalla</text:p></table:table-cell>
+    <table:table-cell table:style-name="TablaCelda" office:value-type="string"><text:p text:style-name="TablaTexto">95 %</text:p></table:table-cell>
+  </table:table-row>
+</table:table>
+
+<text:p text:style-name="Normal">La cobertura global del proyecto es del 64 %, porque las pantallas y la mayoría de los componentes visuales no tienen pruebas. La decisión fue deliberada: la rúbrica evalúa la fiabilidad de los periféricos y de la integración con APIs, no la disposición de los elementos en pantalla, y las pruebas de renderizado son caras de mantener y frágiles ante cualquier cambio de diseño. Aun así se incluyó una prueba de interacción completa sobre el componente de captura de ubicación, que recorre el camino desde la pulsación en pantalla hasta las coordenadas mostradas.</text:p>
+
+<text:p text:style-name="Codigo">Test Suites: 14 passed, 14 total
+Tests:       216 passed, 216 total
+Time:        3.3 s</text:p>
+
+<text:p text:style-name="Captura">[ ESPACIO PARA CAPTURA 1 — Salida de la terminal al ejecutar «npm test», mostrando las 14 suites y las 216 pruebas en verde ]</text:p>
+<text:p text:style-name="Epigrafe">Figura 1. Ejecución completa de la suite de pruebas automatizadas.</text:p>
+
+<!-- ===================== 8. FUNCIONAMIENTO ===================== -->
+<text:p text:style-name="Titulo1">8. El sistema en funcionamiento</text:p>
+
+<text:p text:style-name="Normal">Esta sección recorre la aplicación tal como la ve el usuario. Las capturas se tomaron sobre un dispositivo Android.</text:p>
+
+<text:p text:style-name="Titulo2">8.1. Acceso y diario</text:p>
+
+<text:p text:style-name="Captura">[ ESPACIO PARA CAPTURA 2 — Pantalla de bienvenida de Áureo ]</text:p>
+<text:p text:style-name="Epigrafe">Figura 2. Pantalla de bienvenida, heredada de la primera unidad.</text:p>
+
+<text:p text:style-name="Captura">[ ESPACIO PARA CAPTURA 3 — Pantalla de inicio de sesión, mostrando la validación de un campo vacío ]</text:p>
+<text:p text:style-name="Epigrafe">Figura 3. Acceso con validación de campos y respuesta visual.</text:p>
+
+<text:p text:style-name="Captura">[ ESPACIO PARA CAPTURA 4 — Diario vacío, con el banner de cotización mostrando el precio real del oro ]</text:p>
+<text:p text:style-name="Epigrafe">Figura 4. Diario sin operaciones. El precio del oro ya proviene de la API externa.</text:p>
+
+<text:p text:style-name="Captura">[ ESPACIO PARA CAPTURA 5 — Diario con varias operaciones, mostrando el resumen de abiertas y el resultado acumulado ]</text:p>
+<text:p text:style-name="Epigrafe">Figura 5. Diario con operaciones registradas, sus miniaturas y sus coordenadas.</text:p>
+
+<text:p text:style-name="Titulo2">8.2. Registro de una operación con periféricos</text:p>
+
+<text:p text:style-name="Captura">[ ESPACIO PARA CAPTURA 6 — Formulario de nueva operación completo, con el selector compra/venta y los campos vacíos ]</text:p>
+<text:p text:style-name="Epigrafe">Figura 6. Formulario de registro con la cotización en vivo en la parte superior.</text:p>
+
+<text:p text:style-name="Captura">[ ESPACIO PARA CAPTURA 7 — Diálogo del sistema pidiendo permiso de cámara ]</text:p>
+<text:p text:style-name="Epigrafe">Figura 7. Solicitud del permiso de cámara en tiempo de ejecución, con el mensaje que explica su uso.</text:p>
+
+<text:p text:style-name="Captura">[ ESPACIO PARA CAPTURA 8 — Cámara abierta, a punto de tomar la foto ]</text:p>
+<text:p text:style-name="Epigrafe">Figura 8. Captura de la fotografía con la cámara del dispositivo.</text:p>
+
+<text:p text:style-name="Captura">[ ESPACIO PARA CAPTURA 9 — Formulario con la foto ya adjunta en la vista previa ]</text:p>
+<text:p text:style-name="Epigrafe">Figura 9. Fotografía adjunta a la operación, con la opción de quitarla o volver a tomarla.</text:p>
+
+<text:p text:style-name="Captura">[ ESPACIO PARA CAPTURA 10 — Diálogo del sistema pidiendo permiso de ubicación ]</text:p>
+<text:p text:style-name="Epigrafe">Figura 10. Solicitud del permiso de ubicación, únicamente en primer plano.</text:p>
+
+<text:p text:style-name="Captura">[ ESPACIO PARA CAPTURA 11 — Formulario mostrando las coordenadas ya capturadas ]</text:p>
+<text:p text:style-name="Epigrafe">Figura 11. Coordenadas obtenidas del GPS y mostradas en formato legible.</text:p>
+
+<text:p text:style-name="Titulo2">8.3. Gestión de permisos denegados</text:p>
+
+<text:p text:style-name="Captura">[ ESPACIO PARA CAPTURA 12 — Alerta ofreciendo «Abrir ajustes» tras denegar un permiso de forma definitiva ]</text:p>
+<text:p text:style-name="Epigrafe">Figura 12. Cuando el sistema ya no volverá a preguntar, la aplicación ofrece la única salida disponible.</text:p>
+
+<text:p text:style-name="Titulo2">8.4. Integración con servicios web</text:p>
+
+<text:p text:style-name="Captura">[ ESPACIO PARA CAPTURA 13 — Pantalla «Respaldo en la nube» sin respaldo previo ]</text:p>
+<text:p text:style-name="Epigrafe">Figura 13. Estado inicial de la sincronización, antes del primer respaldo.</text:p>
+
+<text:p text:style-name="Captura">[ ESPACIO PARA CAPTURA 14 — Pantalla de respaldo tras subir, mostrando el identificador remoto y el mensaje de éxito ]</text:p>
+<text:p text:style-name="Epigrafe">Figura 14. Diario respaldado en el servicio web, con su identificador y la fecha de sincronización.</text:p>
+
+<text:p text:style-name="Captura">[ ESPACIO PARA CAPTURA 15 — Mensaje de importación exitosa tras traer operaciones desde la nube ]</text:p>
+<text:p text:style-name="Epigrafe">Figura 15. Importación desde la API externa, fusionada con el diario del dispositivo.</text:p>
+
+<text:p text:style-name="Titulo2">8.5. Comportamiento sin conexión</text:p>
+
+<text:p text:style-name="Captura">[ ESPACIO PARA CAPTURA 16 — Diario funcionando con el modo avión activado, mostrando el aviso de error en el banner de cotización ]</text:p>
+<text:p text:style-name="Epigrafe">Figura 16. Sin conexión el diario sigue operativo; solo la cotización informa que no hay red.</text:p>
+
+<!-- ===================== 9. LIMITACIONES ===================== -->
+<text:p text:style-name="Titulo1">9. Limitaciones conocidas</text:p>
+
+<text:p text:style-name="Normal">Documentamos de forma explícita las decisiones que sabemos que no serían aceptables en un producto real, porque reconocerlas con su justificación nos parece preferible a dejarlas sin mencionar.</text:p>
+
+<text:p text:style-name="Titulo3">El servicio de respaldo es público y sin autenticación</text:p>
+
+<text:p text:style-name="Normal">Cualquier persona que conozca el identificador de un respaldo puede leerlo, modificarlo o borrarlo. El servicio se eligió por su capacidad de demostrar una integración REST completa sin credenciales, que es lo que evalúa esta unidad, pero no debe usarse con información personal. En Áureo el diario es de operaciones simuladas, de modo que no hay datos reales comprometidos. La aplicación advierte de esta limitación en la propia pantalla de sincronización. En un producto real, el respaldo iría contra un servidor propio con autenticación por usuario.</text:p>
+
+<text:p text:style-name="Titulo3">La autenticación es local</text:p>
+
+<text:p text:style-name="Normal">La pantalla de acceso valida los campos y da respuesta visual, pero no verifica las credenciales contra ningún servidor ni separa los datos por usuario. Se priorizó el esfuerzo hacia los periféricos, la integración con APIs y las pruebas, que son los aspectos que la rúbrica de esta unidad evalúa de forma explícita.</text:p>
+
+<text:p text:style-name="Titulo3">Las fotografías no viajan al respaldo</text:p>
+
+<text:p text:style-name="Normal">Lo que se guarda en cada operación es la ruta local de la imagen dentro del dispositivo, no la imagen en sí. Al importar un diario en otro teléfono, las operaciones llegan completas pero sus fotografías no se ven, porque esa ruta no existe en el dispositivo nuevo. Transferir las imágenes exigiría codificarlas y subirlas, lo que multiplicaría el tamaño del respaldo y excede lo que pide la evaluación.</text:p>
+
+<text:p text:style-name="Titulo3">Dependencia de servicios gratuitos de terceros</text:p>
+
+<text:p text:style-name="Normal">Ambas APIs son servicios públicos que podrían dejar de estar disponibles. El riesgo está mitigado por diseño: el diario funciona por completo sin conexión, y la caída de cualquiera de los dos servicios degrada la experiencia sin impedir el uso de la aplicación.</text:p>
+
+<!-- ===================== 10. CONCLUSIÓN ===================== -->
+<text:p text:style-name="Titulo1">10. Conclusión</text:p>
+
+<text:p text:style-name="Normal">La entrega amplía Áureo con las capacidades que exige el resultado de aprendizaje de la unidad: acceso a la cámara y al GPS con gestión explícita de permisos, integración en ambas direcciones con servicios web externos, almacenamiento local que permite trabajar sin conexión, y una suite de pruebas automatizadas que verifica tanto los periféricos como la comunicación con las APIs.</text:p>
+
+<text:p text:style-name="Normal">Dos aprendizajes destacan por encima del resto. El primero es que separar la decisión de la ejecución no es una preferencia estilística: fue lo que hizo posible probar la lógica de los periféricos sin depender de una cámara ni de un GPS, y por lo tanto lo que hizo viable la suite de pruebas. El segundo es el defecto de persistencia descrito en la sección 7.4, que ninguna revisión visual ni el verificador de tipos habrían detectado, y que habría llegado al usuario como una pérdida silenciosa de sus datos. Escribir las pruebas no fue un trámite posterior al desarrollo, sino la actividad que encontró el error más grave del proyecto.</text:p>
+
+<!-- ===================== ANEXO A ===================== -->
+<text:p text:style-name="Titulo1">Anexo A. Cómo ejecutar el proyecto</text:p>
+
+<text:p text:style-name="Normal">El repositorio se encuentra en la dirección indicada en la portada. Requiere Node.js 20 o superior y la aplicación Expo Go instalada en un dispositivo Android o iOS.</text:p>
+
+<text:p text:style-name="Codigo">git clone https://github.com/ottonlucena/Proyecto-eva2-app-moviles-AureoIA.git
+cd Proyecto-eva2-app-moviles-AureoIA
+npm install
+
+npm start           # inicia Expo; escanear el código QR con Expo Go
+npm test            # ejecuta las 216 pruebas automatizadas
+npm run test:cobertura   # ejecuta las pruebas e informa la cobertura
+npm run typecheck   # verifica los tipos sin generar archivos</text:p>
+
+<text:p text:style-name="Normal">Para comprobar el GPS en un emulador de Android es necesario habilitarlo previamente: en los controles extendidos del emulador, apartado <text:span text:style-name="Cursiva">Location</text:span>, activar la señal de GPS, fijar un punto en el mapa y guardarlo. Sin ese paso el emulador no entrega coordenadas y la captura de ubicación agotará su tiempo de espera. La cámara, por su parte, requiere que el perfil del dispositivo virtual tenga una cámara configurada; de lo contrario debe usarse la opción de galería.</text:p>
+
+<!-- ===================== ANEXO B ===================== -->
+<text:p text:style-name="Titulo1">Anexo B. Correspondencia con la rúbrica</text:p>
+
+<table:table table:name="TablaRubrica" table:style-name="Tabla">
+  <table:table-column table:style-name="ColAncha"/>
+  <table:table-column table:style-name="ColAngosta"/>
+  <table:table-column table:style-name="ColAngosta"/>
+  <table:table-row>
+    <table:table-cell table:style-name="TablaCeldaCab" office:value-type="string"><text:p text:style-name="TablaTextoCab">Indicador de la rúbrica</text:p></table:table-cell>
+    <table:table-cell table:style-name="TablaCeldaCab" office:value-type="string"><text:p text:style-name="TablaTextoCab">Sección</text:p></table:table-cell>
+    <table:table-cell table:style-name="TablaCeldaCab" office:value-type="string"><text:p text:style-name="TablaTextoCab">Figuras</text:p></table:table-cell>
+  </table:table-row>
+  <table:table-row>
+    <table:table-cell table:style-name="TablaCelda" office:value-type="string"><text:p text:style-name="TablaTexto">Desarrolla funcionalidades que interactúan con los periféricos del dispositivo</text:p></table:table-cell>
+    <table:table-cell table:style-name="TablaCelda" office:value-type="string"><text:p text:style-name="TablaTexto">3</text:p></table:table-cell>
+    <table:table-cell table:style-name="TablaCelda" office:value-type="string"><text:p text:style-name="TablaTexto">6 a 11</text:p></table:table-cell>
+  </table:table-row>
+  <table:table-row>
+    <table:table-cell table:style-name="TablaCelda" office:value-type="string"><text:p text:style-name="TablaTexto">Integra los permisos de usuario de manera segura y conforme a las mejores prácticas</text:p></table:table-cell>
+    <table:table-cell table:style-name="TablaCelda" office:value-type="string"><text:p text:style-name="TablaTexto">4</text:p></table:table-cell>
+    <table:table-cell table:style-name="TablaCelda" office:value-type="string"><text:p text:style-name="TablaTexto">7, 10, 12</text:p></table:table-cell>
+  </table:table-row>
+  <table:table-row>
+    <table:table-cell table:style-name="TablaCelda" office:value-type="string"><text:p text:style-name="TablaTexto">Prueba la funcionalidad de los periféricos, asegurando fiabilidad y precisión</text:p></table:table-cell>
+    <table:table-cell table:style-name="TablaCelda" office:value-type="string"><text:p text:style-name="TablaTexto">7.2</text:p></table:table-cell>
+    <table:table-cell table:style-name="TablaCelda" office:value-type="string"><text:p text:style-name="TablaTexto">1</text:p></table:table-cell>
+  </table:table-row>
+  <table:table-row>
+    <table:table-cell table:style-name="TablaCelda" office:value-type="string"><text:p text:style-name="TablaTexto">Implementa la integración con servicios web y APIs</text:p></table:table-cell>
+    <table:table-cell table:style-name="TablaCelda" office:value-type="string"><text:p text:style-name="TablaTexto">5</text:p></table:table-cell>
+    <table:table-cell table:style-name="TablaCelda" office:value-type="string"><text:p text:style-name="TablaTexto">4, 13 a 15</text:p></table:table-cell>
+  </table:table-row>
+  <table:table-row>
+    <table:table-cell table:style-name="TablaCelda" office:value-type="string"><text:p text:style-name="TablaTexto">Prueba la integración con servicios web y APIs, asegurando fiabilidad y seguridad</text:p></table:table-cell>
+    <table:table-cell table:style-name="TablaCelda" office:value-type="string"><text:p text:style-name="TablaTexto">7.3</text:p></table:table-cell>
+    <table:table-cell table:style-name="TablaCelda" office:value-type="string"><text:p text:style-name="TablaTexto">1, 16</text:p></table:table-cell>
+  </table:table-row>
+</table:table>
+
+</office:text>
+</office:body>
+</office:document>
